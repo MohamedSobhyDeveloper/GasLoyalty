@@ -3,5 +3,12 @@
     <string name="gasloyalty">GasLoyalty</string>
     <string name="scan">Scan</string>
     <string name="check_connections">Sorry we couid not make connections to our servers. kindly check your internet connection</string>
+    <string name="login">Login</string>
+    <string name="password">password</string>
+    <string name="user_name">user name</string>
+    <string name="read_qrcode">Read Qrcode</string>
+    <string name="read_plate_number">Read Plate Number</string>
+    <string name="language">Language</string>
+    <string name="rotate">0</string>
 
 </resources>
