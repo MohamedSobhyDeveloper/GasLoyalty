@@ -11,5 +11,15 @@
     <string name="read_plate_number">قراءة لوحة السيارة</string>
     <string name="language">اللغة</string>
     <string name="rotate">180</string>
+    <string name="enter_name_password">أدخل اسم المستخدم أو كلمة المرور </string>
+    <string name="correct_username_password">أدخل اسم المستخدم أو كلمة المرور الصحيحة</string>
+    <string name="signout">تسجيل الخروج</string>
+    <string name="choose_language">choose language</string>
+    <string name="english">english</string>
+    <string name="arabic">Arabic</string>
+    <string name="cancel">cancel</string>
+    <string name="want_logout_from_app">Are you sure to log out from app?</string>
+    <string name="yes">yes</string>
+    <string name="no">No</string>
 
 </resources>

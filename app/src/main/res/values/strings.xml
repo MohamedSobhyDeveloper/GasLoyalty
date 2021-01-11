@@ -6,9 +6,19 @@
     <string name="login">Login</string>
     <string name="password">password</string>
     <string name="user_name">user name</string>
-    <string name="read_qrcode">Read Qrcode</string>
-    <string name="read_plate_number">Read Plate Number</string>
+    <string name="read_qrcode">Scan Tank Code</string>
+    <string name="read_plate_number">Capture Plate Number</string>
     <string name="language">Language</string>
     <string name="rotate">0</string>
+    <string name="enter_name_password">enter user name or password</string>
+    <string name="correct_username_password">enter correct username or password</string>
+    <string name="signout">Signout</string>
+    <string name="choose_language">Choose language</string>
+    <string name="english">English</string>
+    <string name="arabic">Arabic</string>
+    <string name="cancel">Cancel</string>
+    <string name="want_logout_from_app">Are you sure to log out from app?</string>
+    <string name="yes">yes</string>
+    <string name="no">No</string>
 
 </resources>

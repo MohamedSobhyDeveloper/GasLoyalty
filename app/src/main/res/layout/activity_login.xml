@@ -39,14 +39,24 @@
             />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/purple_200"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:layout_marginTop="5dp"
+        android:id="@+id/viewone"
+        />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:src="@drawable/manager"
         android:layout_marginTop="25dp"
         android:id="@+id/logo"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/viewone"
         tools:ignore="ContentDescription" />
+
 
     <EditText
         android:id="@+id/username"
@@ -63,8 +73,10 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="25dp"
         android:textAlignment="viewStart"
-        tools:ignore="Autofill"
-        android:gravity="start" />
+        android:background="@drawable/roundedbuttonprimary"
+        android:padding="5dp"
+        tools:ignore="Autofill,RtlCompat"
+        android:gravity="center" />
 
 
     <EditText
@@ -82,8 +94,12 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
-        tools:ignore="Autofill"
-        android:gravity="start" />
+        tools:ignore="Autofill,RtlCompat"
+        android:gravity="center"
+        android:background="@drawable/roundedbuttonprimary"
+        android:padding="5dp"
+        />
+
 
 
     <Button

@@ -4,10 +4,9 @@ import android.content.Context
 import android.util.Log
 import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitResp
 import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitRespAdapter
-import com.interactive.ksi.propertyturkeybooking.utlitites.Constant
 import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
 import com.interactive.ksi.propertyturkeybooking.utlitites.HelpMe
-import com.interactive.ksi.propertyturkeybooking.utlitites.LoadingDialog
+import com.quekitapp.gasloyalty.utlitites.Loading
 import com.sdsmdg.tastytoast.TastyToast
 import okhttp3.MultipartBody
 import org.json.JSONException
@@ -37,7 +36,14 @@ class HandelCalls {
         this.onRespnseAdapter = onRespnseAdapter
     }
 
-    fun call(flag: String, meMap: HashMap<String, String?>?, ShowLoadingDialog: Boolean) {
+    fun call(flag: String, meMap: HashMap<String, String?>?, ShowLoadingDialog: Boolean,onRespnseSucess: HandleRetrofitResp) {
+        onRespnse = onRespnseSucess
+
+        if (flag==DataEnum.login.name){
+            val username = meMap!!["username"]
+            val password = meMap!!["password"]
+            callRetrofit(restRetrofit!!.getClientService().login(username,password), flag, ShowLoadingDialog)
+        }
 
     }
 
@@ -73,7 +79,7 @@ class HandelCalls {
     }
     */
     fun <T> callRetrofit(call: Call<T>?, flag: String?, ShowDialog: Boolean) {
-        val progressDialog = LoadingDialog(context)
+        val progressDialog = Loading(context)
         if (ShowDialog) {
             progressDialog.show()
         }

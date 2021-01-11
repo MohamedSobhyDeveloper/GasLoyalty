@@ -6,9 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SplashActivity">
 
-
-
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -16,10 +14,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textAlignment="center"
-        android:text="@string/gasloyalty"
-        android:textSize="30sp"
-        android:textColor="@color/purple_200"
-        android:textStyle="bold"
-        android:gravity="center_horizontal" />
+        android:src="@drawable/logo"
+        android:gravity="center_horizontal"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

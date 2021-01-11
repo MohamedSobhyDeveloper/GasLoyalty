@@ -8,6 +8,7 @@ import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
 import com.interactive.ksi.propertyturkeybooking.utlitites.PrefsUtil.with
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -65,10 +66,10 @@ class RestRetrofit private constructor() {
                 .connectTimeout(1, TimeUnit.MINUTES)
 
 
-//        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-//        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//        builder.addInterceptor(interceptor);
-//
+        val interceptor =  HttpLoggingInterceptor()
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        builder.addInterceptor(interceptor)
+        //
 //          httpClient.addInterceptor(interceptor).build();
 //        builder.addInterceptor { chain ->
 //            val request = chain.request()

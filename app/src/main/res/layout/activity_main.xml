@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/logo"
+        />
+
     <Button
         android:id="@+id/readQrcodeBtn"
         android:layout_width="match_parent"
@@ -14,12 +25,12 @@
         android:background="@drawable/roundedbuttonblue"
         android:text="@string/read_qrcode"
         android:textColor="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
         />
 
     <Button
@@ -54,6 +65,23 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="25dp"
         />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/roundedbuttonblue"
+        android:text="@string/signout"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/languageBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="25dp"
+        />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
