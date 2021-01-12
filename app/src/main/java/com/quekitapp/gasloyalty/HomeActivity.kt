@@ -5,19 +5,36 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.AlertDialog.Builder
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitResp
+import com.interactive.ksi.propertyturkeybooking.retrofitconfig.HandelCalls
+import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
+import com.interactive.ksi.propertyturkeybooking.utlitites.HelpMe
 import com.interactive.ksi.propertyturkeybooking.utlitites.PrefsUtil
+import com.quekitapp.gasloyalty.models.LogiModel
+import com.quekitapp.gasloyalty.models.PlateNumberModel
 import com.quekitapp.gasloyalty.utlitites.SetupLanguage
+import com.sdsmdg.tastytoast.TastyToast
 import com.tbruyelle.rxpermissions2.RxPermissions
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import pl.aprilapps.easyphotopicker.DefaultCallback
+import pl.aprilapps.easyphotopicker.EasyImage
+import java.io.File
+import java.io.IOException
+import java.util.ArrayList
 
 
-class HomeActivity : BaseActivity() {
+class HomeActivity : BaseActivity(),HandleRetrofitResp {
     var dialog: BottomSheetDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +53,9 @@ class HomeActivity : BaseActivity() {
 
         rxPermissions
                 .request(
-                        Manifest.permission.CAMERA
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.CAMERA
                 )
                 .subscribe { granted ->
                     if (granted) { // Always true pre-M
@@ -51,7 +70,10 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun setupBottomSheet() {
-        @SuppressLint("InflateParams") val modalbottomsheet: View = layoutInflater.inflate(R.layout.language_layout, null)
+        @SuppressLint("InflateParams") val modalbottomsheet: View = layoutInflater.inflate(
+            R.layout.language_layout,
+            null
+        )
 
         dialog = BottomSheetDialog(this)
         dialog!!.setContentView(modalbottomsheet)
@@ -97,8 +119,8 @@ class HomeActivity : BaseActivity() {
         }
 
         plateNumberBtn.setOnClickListener {
-            startActivity(Intent(this, PlateNumberActivity::class.java))
-
+//            startActivity(Intent(this, PlateNumberActivity::class.java))
+            EasyImage.openCamera(this@HomeActivity, 0)
         }
 
         languageBtn.setOnClickListener {
@@ -125,5 +147,42 @@ class HomeActivity : BaseActivity() {
         }
 
 
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        EasyImage.handleActivityResult(requestCode, resultCode, data, this, object : DefaultCallback() {
+            override fun onImagePicked(imageFile: File, source: EasyImage.ImageSource, type: Int) {
+                val uri=Uri.fromFile(imageFile)
+                HandelCalls.getInstance(this@HomeActivity)?.callMultiPart(DataEnum.plateno.name, prepareFilePart(uri.path), true, this@HomeActivity)
+
+            }
+        })
+    }
+
+
+
+    private fun prepareFilePart(fileUri: String?): MultipartBody.Part {
+        val file = File(fileUri)
+        // create RequestBody instance from file
+        val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+        // MultipartBody.Part is used to send also the actual file name
+        return MultipartBody.Part.createFormData("snapshot", file.name, requestFile)
+    }
+
+    override fun onResponseSuccess(flag: String?, o: Any?) {
+        val plateNumberModel: PlateNumberModel = o as PlateNumberModel
+          HelpMe.getInstance(this)?.verifyPlateDialog(plateNumberModel)
+
+    }
+
+    override fun onResponseFailure(flag: String?, o: String?) {
+    }
+
+    override fun onNoContent(flag: String?, code: Int) {
+    }
+
+    override fun onBadRequest(flag: String?, o: Any?) {
     }
 }

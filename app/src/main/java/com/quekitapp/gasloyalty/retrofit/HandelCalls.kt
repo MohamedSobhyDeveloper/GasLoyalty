@@ -50,10 +50,12 @@ class HandelCalls {
 
     }
 
-    fun callMultiPart(flag: String, meMap: HashMap<String?, String?>, @Part postAudio: MultipartBody.Part?, ShowLoadingDialog: Boolean) {
-//        if (flag == DataEnum.postAudio.name) {
-//            callRetrofit(restRetrofit!!.getClientService().postAudio(postAudio, meMap["id"]), flag, ShowLoadingDialog)
-//        }
+    fun callMultiPart(flag: String, @Part snapshot: MultipartBody.Part?, ShowLoadingDialog: Boolean,onRespnseSucess: HandleRetrofitResp) {
+        onRespnse = onRespnseSucess
+
+        if (flag == DataEnum.plateno.name) {
+            callRetrofit(restRetrofit!!.getClientService().uploadPlateNo(snapshot), flag, ShowLoadingDialog)
+        }
     }
 
     /*

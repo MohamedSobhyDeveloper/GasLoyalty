@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.quekitapp.gasloyalty">
 
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -16,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
         <activity android:name=".BaseActivity" />
-        <activity android:name=".PlateNumberActivity" />
+        <activity android:name=".ChargeActivity" />
         <activity android:name=".ScanQrActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>

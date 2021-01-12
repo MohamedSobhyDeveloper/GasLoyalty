@@ -18,6 +18,7 @@ import android.widget.TextView
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.quekitapp.gasloyalty.R
+import com.quekitapp.gasloyalty.models.PlateNumberModel
 import com.quekitapp.gasloyalty.models.ScanModel
 import com.sdsmdg.tastytoast.TastyToast
 import java.net.ConnectException
@@ -184,6 +185,31 @@ class HelpMe {
         dialogView.show()
     }
 
+
+    @SuppressLint("SetTextI18n")
+    fun verifyPlateDialog(platenumber: PlateNumberModel) {
+        val dialogView = Dialog(context!!)
+        dialogView.setContentView(R.layout.verify_plate_dialog)
+        dialogView.setCanceledOnTouchOutside(true)
+        dialogView.setCancelable(true)
+        dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        val plate_tv = dialogView.findViewById<TextView>(R.id.plate_tv)
+
+        val closeBtn = dialogView.findViewById<TextView>(R.id.closeBtn)
+        closeBtn.setOnClickListener { view: View? -> dialogView.dismiss() }
+
+        if (!platenumber.plate_no.equals("-1")){
+           plate_tv.text=platenumber.plate_no
+        }else{
+           plate_tv.text=context.getString(R.string.cnt_verify_plate_num)
+        }
+
+
+
+
+        dialogView.show()
+    }
 
 
 
