@@ -1,15 +1,19 @@
 package com.quekitapp.gasloyalty
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.app.AlertDialog.*
+import android.app.AlertDialog.Builder
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.interactive.ksi.propertyturkeybooking.utlitites.PrefsUtil
 import com.quekitapp.gasloyalty.utlitites.SetupLanguage
+import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -19,8 +23,31 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-       setupBottomSheet()
+
+        checkPermission()
+        setupBottomSheet()
         click()
+    }
+
+    @SuppressLint("CheckResult")
+    private fun checkPermission() {
+        val rxPermissions = RxPermissions(this)
+        rxPermissions.setLogging(true)
+
+        rxPermissions
+                .request(
+                        Manifest.permission.CAMERA
+                )
+                .subscribe { granted ->
+                    if (granted) { // Always true pre-M
+                        // I can control the camera now
+                        Log.e("m", "permission")
+                    } else {
+                        Toast.makeText(this, "Denied", Toast.LENGTH_SHORT).show()
+                        finish()
+                        // Oups permission denied
+                    }
+                }
     }
 
     private fun setupBottomSheet() {
@@ -82,7 +109,7 @@ class HomeActivity : BaseActivity() {
         }
 
         logout.setOnClickListener {
-            val alert: Builder = Builder(this)
+            val alert = Builder(this)
             alert.setMessage(getString(R.string.want_logout_from_app))
                     .setPositiveButton(getString(R.string.yes)) { dialog, which ->
                         PrefsUtil.with(this).add("id", "-1").apply()

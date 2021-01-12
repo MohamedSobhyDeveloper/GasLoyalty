@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">GasLoyalty</string>
     <string name="gasloyalty">جاز</string>
-    <string name="scan">Scan</string>
-    <string name="check_connections">Sorry we couid not make connections to our servers. kindly check your internet connection</string>
+    <string name="scan">فحص كود الخزان</string>
+    <string name="check_connections"> يرجى التحقق من اتصالك بالإنترنت</string>
     <string name="login">تسجيل الدخول</string>
     <string name="password">الرقم السرى</string>
     <string name="user_name">اسم المستخدم</string>
@@ -16,10 +16,18 @@
     <string name="signout">تسجيل الخروج</string>
     <string name="choose_language">choose language</string>
     <string name="english">english</string>
-    <string name="arabic">Arabic</string>
-    <string name="cancel">cancel</string>
-    <string name="want_logout_from_app">Are you sure to log out from app?</string>
-    <string name="yes">yes</string>
-    <string name="no">No</string>
+    <string name="arabic">عربى</string>
+    <string name="cancel">الغاء</string>
+    <string name="want_logout_from_app">هل تريد تسجيل الخروج من التطبيق ؟</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="mobile_no">رقم التلفون :</string>
+    <string name="name">الاسم :</string>
+    <string name="plate_no">رقم اللوحة :</string>
+    <string name="tank_id">رقم التانك :</string>
+    <string name="balance">الرصيد :</string>
+    <string name="charge">شحن</string>
+    <string name="no_data_found_for_this_tank">لا توجد بينات خاصة بهذا التانك</string>
+    <string name="verify">تحقق</string>
 
 </resources>

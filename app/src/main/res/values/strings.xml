@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">GasLoyalty</string>
     <string name="gasloyalty">GasLoyalty</string>
-    <string name="scan">Scan</string>
+    <string name="scan">Scan Tank Code</string>
     <string name="check_connections">Sorry we couid not make connections to our servers. kindly check your internet connection</string>
     <string name="login">Login</string>
     <string name="password">password</string>
@@ -20,5 +20,13 @@
     <string name="want_logout_from_app">Are you sure to log out from app?</string>
     <string name="yes">yes</string>
     <string name="no">No</string>
+    <string name="mobile_no">Mobile No :</string>
+    <string name="name">Name :</string>
+    <string name="plate_no">Plate No :</string>
+    <string name="tank_id">Tank ID :</string>
+    <string name="balance">Balance :</string>
+    <string name="charge">Charge</string>
+    <string name="no_data_found_for_this_tank">Sorry no data found for this tank</string>
+    <string name="verify">verify</string>
 
 </resources>

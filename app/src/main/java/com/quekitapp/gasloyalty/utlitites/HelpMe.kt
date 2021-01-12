@@ -1,6 +1,8 @@
 package com.interactive.ksi.propertyturkeybooking.utlitites
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
@@ -8,11 +10,15 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.RectF
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+import android.widget.TextView
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.quekitapp.gasloyalty.R
+import com.quekitapp.gasloyalty.models.ScanModel
 import com.sdsmdg.tastytoast.TastyToast
 import java.net.ConnectException
 import java.util.*
@@ -148,8 +154,41 @@ class HelpMe {
     /*================================================================================*/
 
 
+    @SuppressLint("SetTextI18n")
+    fun infoDialog(scanmodel:ScanModel, viewListenerInterface:ViewListenerInterface) {
+        val dialogView = Dialog(context!!)
+        dialogView.setContentView(R.layout.customer_layout_info_dialog)
+        dialogView.setCanceledOnTouchOutside(false)
+        dialogView.setCancelable(false)
+        dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        val charge_btn = dialogView.findViewById<Button>(R.id.chargebtn)
+        val mobile_tv = dialogView.findViewById<TextView>(R.id.mobile_tv)
+        val name_tv = dialogView.findViewById<TextView>(R.id.name_tv)
+        val plate_tv = dialogView.findViewById<TextView>(R.id.plate_tv)
+        val tank_tv = dialogView.findViewById<TextView>(R.id.tank_tv)
+        val blance_tv = dialogView.findViewById<TextView>(R.id.blance_tv)
+        val closeBtn = dialogView.findViewById<TextView>(R.id.closeBtn)
+        closeBtn.setOnClickListener { view: View? -> dialogView.dismiss() }
+        mobile_tv.text=scanmodel.mobile
+        name_tv.text=scanmodel.name
+        plate_tv.text=scanmodel.plate_no
+        tank_tv.text=scanmodel.tag_id
+        blance_tv.text=scanmodel.balance
+
+        charge_btn.setOnClickListener {
+            dialogView.dismiss()
+            viewListenerInterface.clickView()
+        }
+
+
+        dialogView.show()
+    }
+
+
+
+
     interface ViewListenerInterface {
-        fun clickView(agentId: String?, agentName: String?)
+        fun clickView()
     }
 
     companion object {
