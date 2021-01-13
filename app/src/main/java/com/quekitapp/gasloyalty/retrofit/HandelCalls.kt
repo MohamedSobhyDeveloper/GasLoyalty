@@ -46,6 +46,17 @@ class HandelCalls {
         }else if (flag==DataEnum.scan.name){
             val tank_id = meMap!!["tankid"]
             callRetrofit(restRetrofit!!.getClientService().scan(tank_id), flag, ShowLoadingDialog)
+        }else if (flag==DataEnum.charge.name){
+
+            callRetrofit(restRetrofit!!.getClientService().charge(meMap), flag, ShowLoadingDialog)
+
+        }else if (flag==DataEnum.verify.name){
+            val mobile_no = meMap!!["mobile"]
+            val verify_code = meMap["code"]
+            val amount = meMap["amount"]
+            val quantity = meMap["quantity"]
+            callRetrofit(restRetrofit!!.getClientService().verify(mobile_no,verify_code,amount,quantity), flag, ShowLoadingDialog)
+
         }
 
     }

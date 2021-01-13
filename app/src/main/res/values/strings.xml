@@ -29,5 +29,14 @@
     <string name="no_data_found_for_this_tank">Sorry no data found for this tank</string>
     <string name="verify">verify</string>
     <string name="cnt_verify_plate_num">Cant Verify Plate No</string>
+    <string name="enter_metetrs">Enter metetrs</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="submit">Submit</string>
+    <string name="enter_metrs">please enter meters</string>
+    <string name="enter_amount_please">please enter amount</string>
+    <string name="otp_send">Verification Code sent successfully</string>
+    <string name="enter_verification_code">Enter Verification Code</string>
+    <string name="error_verify_code">error in verification code please try again</string>
+    <string name="charged_successfully">charged successfully</string>
 
 </resources>

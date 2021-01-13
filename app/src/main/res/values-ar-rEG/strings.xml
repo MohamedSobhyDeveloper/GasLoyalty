@@ -7,8 +7,8 @@
     <string name="login">تسجيل الدخول</string>
     <string name="password">الرقم السرى</string>
     <string name="user_name">اسم المستخدم</string>
-    <string name="read_qrcode">قراءة الباركود</string>
-    <string name="read_plate_number">قراءة لوحة السيارة</string>
+    <string name="read_qrcode">قراءة كود التانك</string>
+    <string name="read_plate_number">لتقاط لوحة السيارة</string>
     <string name="language">اللغة</string>
     <string name="rotate">180</string>
     <string name="enter_name_password">أدخل اسم المستخدم أو كلمة المرور </string>
@@ -30,5 +30,14 @@
     <string name="no_data_found_for_this_tank">لا توجد بينات خاصة بهذا التانك</string>
     <string name="verify">تحقق</string>
     <string name="cnt_verify_plate_num">لم يتم التحقق من اللوحة</string>
+    <string name="enter_metetrs">ادخل المترات</string>
+    <string name="enter_amount">ادخل المبلغ</string>
+    <string name="submit">ارسال</string>
+    <string name="enter_metrs">الرجاء إدخال عدد الامتار</string>
+    <string name="enter_amount_please">الرجاء إدخال المبلغ</string>
+    <string name="otp_send">تم إرسال رمز التحقق بنجاح</string>
+    <string name="enter_verification_code">ادخل رمز التحقق</string>
+    <string name="error_verify_code">خطأ في رمز التحقق يرجى المحاولة مرة أخرى</string>
+    <string name="charged_successfully">تم الشحن بنجاح</string>
 
 </resources>

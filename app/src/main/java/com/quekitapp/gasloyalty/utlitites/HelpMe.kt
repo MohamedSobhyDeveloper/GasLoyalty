@@ -14,6 +14,7 @@ import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -202,7 +203,7 @@ class HelpMe {
         if (!platenumber.plate_no.equals("-1")){
            plate_tv.text=platenumber.plate_no
         }else{
-           plate_tv.text=context.getString(R.string.cnt_verify_plate_num)
+           plate_tv.text= context!!.getString(R.string.cnt_verify_plate_num)
         }
 
 
@@ -212,9 +213,46 @@ class HelpMe {
     }
 
 
+    @SuppressLint("SetTextI18n")
+    fun verifycodeDialog(viewListenerInterface:ViewListenerVerifyInterface) {
+        val dialogView = Dialog(context!!)
+        dialogView.setContentView(R.layout.verify_code_dialog)
+        dialogView.setCanceledOnTouchOutside(true)
+        dialogView.setCancelable(true)
+        dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        val verifyCode = dialogView.findViewById<EditText>(R.id.verifyCode)
+        val submit = dialogView.findViewById<Button>(R.id.submitbtn)
+
+        val closeBtn = dialogView.findViewById<TextView>(R.id.closeBtn)
+        closeBtn.setOnClickListener { view: View? -> dialogView.dismiss() }
+
+        submit.setOnClickListener {
+            if (verifyCode.text.isEmpty()){
+                verifyCode.error=context!!.getString(R.string.enter_verification_code)
+            }else{
+                  viewListenerInterface.clickView(verifyCode.text.toString())
+            }
+        }
+
+
+
+
+
+
+        dialogView.show()
+    }
+
+
+
+
 
     interface ViewListenerInterface {
         fun clickView()
+    }
+
+    interface ViewListenerVerifyInterface {
+        fun clickView(code:String)
     }
 
     companion object {

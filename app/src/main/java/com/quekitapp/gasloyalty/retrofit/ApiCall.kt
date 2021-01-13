@@ -1,13 +1,10 @@
 package com.interactive.ksi.propertyturkeybooking.retrofitconfig
 
-import com.quekitapp.gasloyalty.models.LogiModel
-import com.quekitapp.gasloyalty.models.PlateNumberModel
-import com.quekitapp.gasloyalty.models.ScanModel
-import io.reactivex.Single
+import com.quekitapp.gasloyalty.models.*
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
+import java.util.*
 
 
 interface ApiCall {
@@ -19,8 +16,14 @@ interface ApiCall {
 
     @Multipart
     @POST("Member/RecognizePlate.php")
-    fun uploadPlateNo(
-        @Part snapshot: MultipartBody.Part?,
-    ): Call<PlateNumberModel?>?
+    fun uploadPlateNo(@Part snapshot: MultipartBody.Part?): Call<PlateNumberModel?>?
+
+    @FormUrlEncoded
+    @POST("Member/ChargeGas.php")
+    fun charge(@FieldMap requestBody: HashMap<String, String?>?): Call<ChargeModel?>?
+
+    @GET("User/VerifyOTP.php")
+    fun verify(@Query("mobile_no") mobile_no: String?, @Query("recovery_code") recovery_code: String?,@Query("payment_amount") payment_amount: String?, @Query("quantity") quantity: String?): Call<VerifyModel?>?
+
 
 }

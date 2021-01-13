@@ -1,5 +1,6 @@
 package com.quekitapp.gasloyalty
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.zxing.Result
 import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitResp
@@ -27,6 +28,9 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
             scannerview.resumeCameraPreview(this)
 
         }
+        backBtn.setOnClickListener {
+            finish()
+        }
     }
 
 
@@ -53,7 +57,9 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
         }else{
             HelpMe.getInstance(this)?.infoDialog(scanModel,object : HelpMe.ViewListenerInterface{
                 override fun clickView() {
-
+                    val intent = Intent(this@ScanQrActivity, ChargeActivity::class.java)
+                    intent.putExtra("mobile", scanModel.mobile)
+                    startActivity(intent)
                 }
 
             })
