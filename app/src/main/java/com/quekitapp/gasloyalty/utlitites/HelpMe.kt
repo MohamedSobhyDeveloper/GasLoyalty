@@ -136,12 +136,12 @@ class HelpMe {
     }
 
     fun retrofironFailure(t: Throwable) {
-        if (t is ConnectException) {
-            TastyToast.makeText(context, t.message, TastyToast.LENGTH_LONG, TastyToast.ERROR)
-        } else {
+//        if (t is ConnectException) {
+//            TastyToast.makeText(context, t.message, TastyToast.LENGTH_LONG, TastyToast.ERROR)
+//        } else {
             TastyToast.makeText(context, context!!.getString(R.string.check_connections), TastyToast.LENGTH_LONG, TastyToast.ERROR)
             Log.e("errrr", t.message!!)
-        }
+//        }
     }
 
     fun retrofirOnNotTwoHundred(x: Int) {
