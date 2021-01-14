@@ -1,4 +1,4 @@
-package com.quekitapp.gasloyalty
+package com.quekitapp.gasloyalty.view
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -17,12 +17,10 @@ import com.interactive.ksi.propertyturkeybooking.retrofitconfig.HandelCalls
 import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
 import com.interactive.ksi.propertyturkeybooking.utlitites.HelpMe
 import com.interactive.ksi.propertyturkeybooking.utlitites.PrefsUtil
-import com.quekitapp.gasloyalty.models.LogiModel
+import com.quekitapp.gasloyalty.R
 import com.quekitapp.gasloyalty.models.PlateNumberModel
 import com.quekitapp.gasloyalty.utlitites.SetupLanguage
-import com.sdsmdg.tastytoast.TastyToast
 import com.tbruyelle.rxpermissions2.RxPermissions
-import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -30,8 +28,6 @@ import okhttp3.RequestBody
 import pl.aprilapps.easyphotopicker.DefaultCallback
 import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
-import java.io.IOException
-import java.util.ArrayList
 
 
 class HomeActivity : BaseActivity(),HandleRetrofitResp {
@@ -71,7 +67,7 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
 
     private fun setupBottomSheet() {
         @SuppressLint("InflateParams") val modalbottomsheet: View = layoutInflater.inflate(
-            R.layout.language_layout,
+                R.layout.language_layout,
             null
         )
 

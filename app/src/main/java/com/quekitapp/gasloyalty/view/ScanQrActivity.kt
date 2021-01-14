@@ -1,16 +1,25 @@
-package com.quekitapp.gasloyalty
+package com.quekitapp.gasloyalty.view
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import com.google.zxing.Result
 import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitResp
 import com.interactive.ksi.propertyturkeybooking.retrofitconfig.HandelCalls
 import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
 import com.interactive.ksi.propertyturkeybooking.utlitites.HelpMe
+import com.quekitapp.gasloyalty.R
+import com.quekitapp.gasloyalty.models.PlateNumberModel
 import com.quekitapp.gasloyalty.models.ScanModel
 import com.sdsmdg.tastytoast.TastyToast
 import kotlinx.android.synthetic.main.activity_scan_qr.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import pl.aprilapps.easyphotopicker.DefaultCallback
+import pl.aprilapps.easyphotopicker.EasyImage
+import java.io.File
 
 import java.util.HashMap
 
@@ -19,7 +28,7 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan_qr)
 
-      click()
+        click()
 
     }
 
@@ -38,7 +47,6 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
         super.onResume()
         scannerview.setResultHandler(this@ScanQrActivity)
         scannerview.startCamera()
-
     }
 
     override fun onPause() {
@@ -48,6 +56,9 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
 
 
     override fun onResponseSuccess(flag: String?, o: Any?) {
+
+
+        if (flag==DataEnum.scan.name){
 
         val scanModel: ScanModel = o as ScanModel
 
@@ -62,7 +73,16 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
                     startActivity(intent)
                 }
 
+                override fun verifyclickView() {
+                    EasyImage.openCamera(this@ScanQrActivity, 0)
+
+                }
+
             })
+        }
+        }else{
+            val plateNumberModel: PlateNumberModel = o as PlateNumberModel
+            HelpMe.getInstance(this)?.verifyPlateDialog(plateNumberModel)
         }
 
 
@@ -89,5 +109,25 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
             HandelCalls.getInstance(this)?.call(DataEnum.scan.name, meMap, true, this)
 
         }
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        EasyImage.handleActivityResult(requestCode, resultCode, data, this, object : DefaultCallback() {
+            override fun onImagePicked(imageFile: File, source: EasyImage.ImageSource, type: Int) {
+                val uri= Uri.fromFile(imageFile)
+                HandelCalls.getInstance(this@ScanQrActivity)?.callMultiPart(DataEnum.plateno.name, prepareFilePart(uri.path), true, this@ScanQrActivity)
+
+            }
+        })
+    }
+
+    private fun prepareFilePart(fileUri: String?): MultipartBody.Part {
+        val file = File(fileUri)
+        // create RequestBody instance from file
+        val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+        // MultipartBody.Part is used to send also the actual file name
+        return MultipartBody.Part.createFormData("snapshot", file.name, requestFile)
     }
 }

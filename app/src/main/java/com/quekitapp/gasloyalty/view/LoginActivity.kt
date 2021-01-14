@@ -1,4 +1,4 @@
-package com.quekitapp.gasloyalty
+package com.quekitapp.gasloyalty.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitResp
 import com.interactive.ksi.propertyturkeybooking.retrofitconfig.HandelCalls
 import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
 import com.interactive.ksi.propertyturkeybooking.utlitites.PrefsUtil
+import com.quekitapp.gasloyalty.R
 import com.quekitapp.gasloyalty.models.LogiModel
 import com.sdsmdg.tastytoast.TastyToast
 import kotlinx.android.synthetic.main.activity_login.*

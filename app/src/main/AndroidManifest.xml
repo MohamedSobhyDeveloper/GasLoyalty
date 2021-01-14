@@ -16,18 +16,18 @@
         android:theme="@style/Theme.GasLoyalty"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
-        <activity android:name=".BaseActivity" />
-        <activity android:name=".ChargeActivity" />
-        <activity android:name=".ScanQrActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".view.BaseActivity" />
+        <activity android:name=".view.ChargeActivity" />
+        <activity android:name=".view.ScanQrActivity" />
+        <activity android:name=".view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".view.LoginActivity" />
+        <activity android:name=".view.HomeActivity" />
     </application>
 
 </manifest>

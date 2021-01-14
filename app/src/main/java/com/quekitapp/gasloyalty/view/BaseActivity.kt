@@ -1,4 +1,4 @@
-package com.quekitapp.gasloyalty
+package com.quekitapp.gasloyalty.view
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.interactive.ksi.propertyturkeybooking.utlitites.PrefsUtil
+import com.quekitapp.gasloyalty.R
 import java.util.*
 
 open class BaseActivity : AppCompatActivity() {

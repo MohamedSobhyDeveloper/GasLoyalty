@@ -1,9 +1,10 @@
-package com.quekitapp.gasloyalty
+package com.quekitapp.gasloyalty.view
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import com.interactive.ksi.propertyturkeybooking.utlitites.PrefsUtil
+import com.quekitapp.gasloyalty.R
 
 class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

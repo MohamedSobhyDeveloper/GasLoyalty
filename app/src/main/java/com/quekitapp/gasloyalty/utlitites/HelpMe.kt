@@ -164,6 +164,7 @@ class HelpMe {
         dialogView.setCancelable(false)
         dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
         val charge_btn = dialogView.findViewById<Button>(R.id.chargebtn)
+        val verify_btn = dialogView.findViewById<Button>(R.id.verifyplatebtn)
         val mobile_tv = dialogView.findViewById<TextView>(R.id.mobile_tv)
         val name_tv = dialogView.findViewById<TextView>(R.id.name_tv)
         val plate_tv = dialogView.findViewById<TextView>(R.id.plate_tv)
@@ -180,6 +181,10 @@ class HelpMe {
         charge_btn.setOnClickListener {
             dialogView.dismiss()
             viewListenerInterface.clickView()
+        }
+
+        verify_btn.setOnClickListener {
+            viewListenerInterface.verifyclickView()
         }
 
 
@@ -249,6 +254,8 @@ class HelpMe {
 
     interface ViewListenerInterface {
         fun clickView()
+        fun verifyclickView()
+
     }
 
     interface ViewListenerVerifyInterface {
