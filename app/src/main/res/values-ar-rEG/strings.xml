@@ -8,7 +8,7 @@
     <string name="password">الرقم السرى</string>
     <string name="user_name">اسم المستخدم</string>
     <string name="read_qrcode">قراءة كود التانك</string>
-    <string name="read_plate_number">لتقاط لوحة السيارة</string>
+    <string name="read_plate_number">التقاط لوحة السيارة</string>
     <string name="language">اللغة</string>
     <string name="rotate">180</string>
     <string name="enter_name_password">أدخل اسم المستخدم أو كلمة المرور </string>

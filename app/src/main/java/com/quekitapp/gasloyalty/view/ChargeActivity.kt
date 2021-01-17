@@ -7,6 +7,7 @@ import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
 import com.interactive.ksi.propertyturkeybooking.utlitites.HelpMe
 import com.quekitapp.gasloyalty.R
 import com.quekitapp.gasloyalty.models.ChargeModel
+import com.quekitapp.gasloyalty.models.VerifyBody
 import com.quekitapp.gasloyalty.models.VerifyModel
 import com.sdsmdg.tastytoast.TastyToast
 import kotlinx.android.synthetic.main.activity_charge_layout.*
@@ -40,7 +41,9 @@ class ChargeActivity : BaseActivity(),HandleRetrofitResp {
                meMap["mobile_no"] = intent.getStringExtra("mobile")
                meMap["payment_amount"] = amount.text.toString()
                meMap["quantity"] = meters.text.toString()
-               HandelCalls.getInstance(this)?.call(DataEnum.charge.name, meMap, true, this)
+               val chargebody=VerifyBody(intent.getStringExtra("mobile")!!,amount.text.toString(),meters.text.toString(),"")
+
+               HandelCalls.getInstance(this)?.call(DataEnum.charge.name, meMap,chargebody, true, this)
 
             }
 
@@ -56,12 +59,12 @@ class ChargeActivity : BaseActivity(),HandleRetrofitResp {
               HelpMe.getInstance(this)?.verifycodeDialog(object : HelpMe.ViewListenerVerifyInterface{
                   override fun clickView(code: String) {
                       val meMap = HashMap<String, String?>()
-                      meMap["mobile"] = intent.getStringExtra("mobile")
-                      meMap["code"] = code
-                      meMap["amount"] = amount.text.toString()
+                      meMap["mobile_no"] = intent.getStringExtra("mobile")
+                      meMap["recovery_code"] = code
+                      meMap["payment_amount"] = amount.text.toString()
                       meMap["quantity"] = meters.text.toString()
-
-                      HandelCalls.getInstance(this@ChargeActivity)?.call(DataEnum.verify.name, meMap, true, this@ChargeActivity)
+                      val verifybody=VerifyBody(intent.getStringExtra("mobile")!!,amount.text.toString(),meters.text.toString(),code)
+                      HandelCalls.getInstance(this@ChargeActivity)?.call(DataEnum.verify.name, meMap, verifybody,true, this@ChargeActivity)
 
                   }
 

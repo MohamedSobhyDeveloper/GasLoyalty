@@ -6,6 +6,7 @@ import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitResp
 import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitRespAdapter
 import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
 import com.interactive.ksi.propertyturkeybooking.utlitites.HelpMe
+import com.quekitapp.gasloyalty.models.VerifyBody
 import com.quekitapp.gasloyalty.utlitites.Loading
 import com.sdsmdg.tastytoast.TastyToast
 import okhttp3.MultipartBody
@@ -36,7 +37,7 @@ class HandelCalls {
         this.onRespnseAdapter = onRespnseAdapter
     }
 
-    fun call(flag: String, meMap: HashMap<String, String?>?, ShowLoadingDialog: Boolean,onRespnseSucess: HandleRetrofitResp) {
+    fun call(flag: String, meMap: HashMap<String, String?>?, verifyBody: VerifyBody?, ShowLoadingDialog: Boolean, onRespnseSucess: HandleRetrofitResp) {
         onRespnse = onRespnseSucess
 
         if (flag==DataEnum.login.name){
@@ -48,14 +49,10 @@ class HandelCalls {
             callRetrofit(restRetrofit!!.getClientService().scan(tank_id), flag, ShowLoadingDialog)
         }else if (flag==DataEnum.charge.name){
 
-            callRetrofit(restRetrofit!!.getClientService().charge(meMap), flag, ShowLoadingDialog)
+            callRetrofit(restRetrofit!!.getClientService().charge(verifyBody), flag, ShowLoadingDialog)
 
         }else if (flag==DataEnum.verify.name){
-            val mobile_no = meMap!!["mobile"]
-            val verify_code = meMap["code"]
-            val amount = meMap["amount"]
-            val quantity = meMap["quantity"]
-            callRetrofit(restRetrofit!!.getClientService().verify(mobile_no,verify_code,amount,quantity), flag, ShowLoadingDialog)
+            callRetrofit(restRetrofit!!.getClientService().verify(verifyBody), flag, ShowLoadingDialog)
 
         }
 
@@ -94,6 +91,7 @@ class HandelCalls {
 
     }
     */
+
     fun <T> callRetrofit(call: Call<T>?, flag: String?, ShowDialog: Boolean) {
         val progressDialog = Loading(context)
         if (ShowDialog) {

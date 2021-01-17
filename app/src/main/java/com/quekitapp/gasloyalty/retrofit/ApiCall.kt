@@ -18,12 +18,11 @@ interface ApiCall {
     @POST("Member/RecognizePlate.php")
     fun uploadPlateNo(@Part snapshot: MultipartBody.Part?): Call<PlateNumberModel?>?
 
-    @FormUrlEncoded
     @POST("Member/ChargeGas.php")
-    fun charge(@FieldMap requestBody: HashMap<String, String?>?): Call<ChargeModel?>?
+    fun charge(@Body requestBody:VerifyBody?): Call<ChargeModel?>?
 
-    @GET("User/VerifyOTP.php")
-    fun verify(@Query("mobile_no") mobile_no: String?, @Query("recovery_code") recovery_code: String?,@Query("payment_amount") payment_amount: String?, @Query("quantity") quantity: String?): Call<VerifyModel?>?
+    @POST("User/VerifyOTP.php")
+    fun verify(@Body requestBody:VerifyBody?): Call<VerifyModel?>?
 
 
 }

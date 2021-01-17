@@ -106,7 +106,7 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
         if (!tank_id.isEmpty()){
             val meMap = HashMap<String, String?>()
             meMap["tankid"] = tank_id
-            HandelCalls.getInstance(this)?.call(DataEnum.scan.name, meMap, true, this)
+            HandelCalls.getInstance(this)?.call(DataEnum.scan.name, meMap, null,true, this)
 
         }
     }
