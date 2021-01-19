@@ -69,62 +69,7 @@ class RestRetrofit private constructor() {
         val interceptor =  HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         builder.addInterceptor(interceptor)
-        //
-//          httpClient.addInterceptor(interceptor).build();
-//        builder.addInterceptor { chain ->
-//            val request = chain.request()
-//            val newRequest: Request
-//            val apiValue = Constant.apiValue
-//            val token = with(mcontext!!)[DataEnum.AuthToken.name, ""]
-//            Log.d(TAG, "intercept() called with: token = [$token]")
-//            deviceValue = with(mcontext!!)[DataEnum.shFirebaseToken.name, "utiututtt7t7g7tyyyrr"]
-//            Log.e(TAG, "intercept:firebasetoken $deviceValue")
-//            if (!token!!.isEmpty() && !deviceValue!!.isEmpty()) {
-//                Log.d(TAG, """
-//     intercept() first called with: chain  = [$chain]
-//     apiValue$apiValue
-//     authorization$token
-//     firebase $deviceValue
-//     ${getVestionCode(mcontext)}
-//     """.trimIndent())
-//                newRequest = request.newBuilder()
-//                        .header(apiKey, apiValue)
-//                        .header(Authorization, token)
-//                        .header(deviceKey, deviceValue)
-//                        .header("version", getVestionCode(mcontext))
-//                        .method(request.method(), request.body())
-//                        .build()
-//                chain.proceed(newRequest)
-//            } else if (!token.isEmpty()) {
-//                Log.d(TAG, "intercept() second called with: chain = [" + chain + "]" + apiValue + token + deviceValue + getVestionCode(mcontext))
-//                newRequest = request.newBuilder()
-//                        .header(apiKey, apiValue)
-//                        .header(Authorization, token) // todo remove this line when youssef make it possible to login wihout the device
-//                        .header(deviceKey, deviceValue)
-//                        .header("version", getVestionCode(mcontext))
-//                        .method(request.method(), request.body())
-//                        .build()
-//                chain.proceed(newRequest)
-//            } else if (!deviceValue!!.isEmpty()) {
-//                Log.d(TAG, "intercept() third called with: chain = [" + chain + "]" + apiValue + token + deviceValue + getVestionCode(mcontext))
-//                newRequest = request.newBuilder()
-//                        .header(apiKey, apiValue)
-//                        .header(deviceKey, deviceValue)
-//                        .header("version", getVestionCode(mcontext))
-//                        .method(request.method(), request.body())
-//                        .build()
-//                chain.proceed(newRequest)
-//            } else {
-//                Log.d(TAG, "intercept() fifth called with: chain = [" + chain + "]" + apiValue + token + deviceValue + getVestionCode(mcontext))
-//                newRequest = request.newBuilder()
-//                        .header(apiKey, apiValue) // todo remove this line when youssef make it possible to login wihout the device
-//                        .header(deviceKey, deviceValue)
-//                        .header("version", getVestionCode(mcontext))
-//                        .method(request.method(), request.body())
-//                        .build()
-//                chain.proceed(newRequest)
-//            }
-//        }
+
         val httpClient = builder.build()
         val retrofit = Retrofit.Builder()
                 .baseUrl(Constant.baseUrl)
