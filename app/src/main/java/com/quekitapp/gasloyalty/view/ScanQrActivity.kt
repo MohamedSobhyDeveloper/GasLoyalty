@@ -14,8 +14,12 @@ import com.interactive.ksi.propertyturkeybooking.utlitites.HelpMe
 import com.quekitapp.gasloyalty.R
 import com.quekitapp.gasloyalty.models.PlateNumberModel
 import com.quekitapp.gasloyalty.models.ScanModel
+import com.quekitapp.gasloyalty.models.VerifyBody
+import com.quekitapp.gasloyalty.models.VerifyPlate
 import com.sdsmdg.tastytoast.TastyToast
+import kotlinx.android.synthetic.main.activity_charge_layout.*
 import kotlinx.android.synthetic.main.activity_scan_qr.*
+import kotlinx.android.synthetic.main.activity_scan_qr.backBtn
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -124,8 +128,11 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
                 val imageStream = contentResolver.openInputStream(uri)
                 val selectedImage = BitmapFactory.decodeStream(imageStream)
                 val encodedImage: String? = encodeImage(selectedImage)
+                val verifybody= VerifyPlate(encodedImage!!)
 
-                HandelCalls.getInstance(this@ScanQrActivity)?.callMultiPart(DataEnum.plateno.name, encodedImage, true, this@ScanQrActivity)
+
+
+                HandelCalls.getInstance(this@ScanQrActivity)?.callMultiPart(DataEnum.plateno.name, verifybody, true, this@ScanQrActivity)
 
             }
         })

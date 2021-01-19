@@ -13,7 +13,7 @@ interface ApiCall {
     fun scan(@Query("tank_id") tank_id: String?): Call<ScanModel?>?
 
     @POST("Member/RecognizePlate.php")
-    fun uploadPlateNo(@Body requestBody: String?): Call<PlateNumberModel?>?
+    fun uploadPlateNo(@Body requestBody: VerifyPlate?): Call<PlateNumberModel?>?
 
     @POST("Member/ChargeGas.php")
     fun charge(@Body requestBody:VerifyBody?): Call<ChargeModel?>?

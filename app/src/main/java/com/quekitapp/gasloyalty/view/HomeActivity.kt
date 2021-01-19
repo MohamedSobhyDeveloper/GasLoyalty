@@ -22,6 +22,7 @@ import com.interactive.ksi.propertyturkeybooking.utlitites.HelpMe
 import com.interactive.ksi.propertyturkeybooking.utlitites.PrefsUtil
 import com.quekitapp.gasloyalty.R
 import com.quekitapp.gasloyalty.models.PlateNumberModel
+import com.quekitapp.gasloyalty.models.VerifyPlate
 import com.quekitapp.gasloyalty.utlitites.SetupLanguage
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_main.*
@@ -158,10 +159,12 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
                 val imageStream = contentResolver.openInputStream(uri)
                 val selectedImage = BitmapFactory.decodeStream(imageStream)
                 val encodedImage: String? = encodeImage(selectedImage)
+                val verifybody= VerifyPlate(encodedImage!!)
 
-                Log.e("image", encodedImage!!)
+                Log.e("image", verifybody.snapshot!!)
+                Log.e("json", verifybody.toString()!!)
 
-                HandelCalls.getInstance(this@HomeActivity)?.callMultiPart(DataEnum.plateno.name, encodedImage, true, this@HomeActivity)
+                HandelCalls.getInstance(this@HomeActivity)?.callMultiPart(DataEnum.plateno.name, verifybody, true, this@HomeActivity)
 
             }
         })

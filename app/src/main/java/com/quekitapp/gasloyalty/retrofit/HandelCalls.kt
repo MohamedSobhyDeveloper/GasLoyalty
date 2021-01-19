@@ -7,6 +7,7 @@ import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitRespAd
 import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
 import com.interactive.ksi.propertyturkeybooking.utlitites.HelpMe
 import com.quekitapp.gasloyalty.models.VerifyBody
+import com.quekitapp.gasloyalty.models.VerifyPlate
 import com.quekitapp.gasloyalty.utlitites.Loading
 import com.sdsmdg.tastytoast.TastyToast
 import org.json.JSONException
@@ -56,7 +57,7 @@ class HandelCalls {
 
     }
 
-    fun callMultiPart(flag: String, verifyPlate: String?, ShowLoadingDialog: Boolean, onRespnseSucess: HandleRetrofitResp) {
+    fun callMultiPart(flag: String, verifyPlate: VerifyPlate?, ShowLoadingDialog: Boolean, onRespnseSucess: HandleRetrofitResp) {
         onRespnse = onRespnseSucess
 
         if (flag == DataEnum.plateno.name) {
