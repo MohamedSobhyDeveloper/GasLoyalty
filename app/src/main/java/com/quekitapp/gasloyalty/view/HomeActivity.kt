@@ -5,8 +5,11 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.AlertDialog.Builder
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.TextView
@@ -27,6 +30,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import pl.aprilapps.easyphotopicker.DefaultCallback
 import pl.aprilapps.easyphotopicker.EasyImage
+import java.io.ByteArrayOutputStream
 import java.io.File
 
 
@@ -49,9 +53,9 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
 
         rxPermissions
                 .request(
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.CAMERA
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA
                 )
                 .subscribe { granted ->
                     if (granted) { // Always true pre-M
@@ -68,7 +72,7 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
     private fun setupBottomSheet() {
         @SuppressLint("InflateParams") val modalbottomsheet: View = layoutInflater.inflate(
                 R.layout.language_layout,
-            null
+                null
         )
 
         dialog = BottomSheetDialog(this)
@@ -150,11 +154,24 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
         super.onActivityResult(requestCode, resultCode, data)
         EasyImage.handleActivityResult(requestCode, resultCode, data, this, object : DefaultCallback() {
             override fun onImagePicked(imageFile: File, source: EasyImage.ImageSource, type: Int) {
-                val uri=Uri.fromFile(imageFile)
-                HandelCalls.getInstance(this@HomeActivity)?.callMultiPart(DataEnum.plateno.name, prepareFilePart(uri.path), true, this@HomeActivity)
+                val uri = Uri.fromFile(imageFile)
+                val imageStream = contentResolver.openInputStream(uri)
+                val selectedImage = BitmapFactory.decodeStream(imageStream)
+                val encodedImage: String? = encodeImage(selectedImage)
+
+                Log.e("image", encodedImage!!)
+
+                HandelCalls.getInstance(this@HomeActivity)?.callMultiPart(DataEnum.plateno.name, encodedImage, true, this@HomeActivity)
 
             }
         })
+    }
+
+    private fun encodeImage(bm: Bitmap): String? {
+        val baos = ByteArrayOutputStream()
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val b: ByteArray = baos.toByteArray()
+        return Base64.encodeToString(b, Base64.DEFAULT)
     }
 
 

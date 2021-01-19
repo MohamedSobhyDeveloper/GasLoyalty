@@ -9,13 +9,11 @@ import com.interactive.ksi.propertyturkeybooking.utlitites.HelpMe
 import com.quekitapp.gasloyalty.models.VerifyBody
 import com.quekitapp.gasloyalty.utlitites.Loading
 import com.sdsmdg.tastytoast.TastyToast
-import okhttp3.MultipartBody
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Part
 import java.io.IOException
 import java.util.*
 
@@ -58,11 +56,11 @@ class HandelCalls {
 
     }
 
-    fun callMultiPart(flag: String, @Part snapshot: MultipartBody.Part?, ShowLoadingDialog: Boolean,onRespnseSucess: HandleRetrofitResp) {
+    fun callMultiPart(flag: String, verifyPlate: String?, ShowLoadingDialog: Boolean, onRespnseSucess: HandleRetrofitResp) {
         onRespnse = onRespnseSucess
 
         if (flag == DataEnum.plateno.name) {
-            callRetrofit(restRetrofit!!.getClientService().uploadPlateNo(snapshot), flag, ShowLoadingDialog)
+            callRetrofit(restRetrofit!!.getClientService().uploadPlateNo(verifyPlate), flag, ShowLoadingDialog)
         }
     }
 

@@ -1,8 +1,11 @@
 package com.quekitapp.gasloyalty.view
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Base64
 import com.google.zxing.Result
 import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitResp
 import com.interactive.ksi.propertyturkeybooking.retrofitconfig.HandelCalls
@@ -19,6 +22,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import pl.aprilapps.easyphotopicker.DefaultCallback
 import pl.aprilapps.easyphotopicker.EasyImage
+import java.io.ByteArrayOutputStream
 import java.io.File
 
 import java.util.HashMap
@@ -117,11 +121,23 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
         EasyImage.handleActivityResult(requestCode, resultCode, data, this, object : DefaultCallback() {
             override fun onImagePicked(imageFile: File, source: EasyImage.ImageSource, type: Int) {
                 val uri= Uri.fromFile(imageFile)
-                HandelCalls.getInstance(this@ScanQrActivity)?.callMultiPart(DataEnum.plateno.name, prepareFilePart(uri.path), true, this@ScanQrActivity)
+                val imageStream = contentResolver.openInputStream(uri)
+                val selectedImage = BitmapFactory.decodeStream(imageStream)
+                val encodedImage: String? = encodeImage(selectedImage)
+
+                HandelCalls.getInstance(this@ScanQrActivity)?.callMultiPart(DataEnum.plateno.name, encodedImage, true, this@ScanQrActivity)
 
             }
         })
     }
+
+    private fun encodeImage(bm: Bitmap): String? {
+        val baos = ByteArrayOutputStream()
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val b: ByteArray = baos.toByteArray()
+        return Base64.encodeToString(b, Base64.DEFAULT)
+    }
+
 
     private fun prepareFilePart(fileUri: String?): MultipartBody.Part {
         val file = File(fileUri)

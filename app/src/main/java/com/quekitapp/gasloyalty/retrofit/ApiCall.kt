@@ -1,10 +1,8 @@
 package com.interactive.ksi.propertyturkeybooking.retrofitconfig
 
 import com.quekitapp.gasloyalty.models.*
-import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
-import java.util.*
 
 
 interface ApiCall {
@@ -14,9 +12,8 @@ interface ApiCall {
     @GET("Member/ScanTank.php")
     fun scan(@Query("tank_id") tank_id: String?): Call<ScanModel?>?
 
-    @Multipart
     @POST("Member/RecognizePlate.php")
-    fun uploadPlateNo(@Part snapshot: MultipartBody.Part?): Call<PlateNumberModel?>?
+    fun uploadPlateNo(@Body requestBody: String?): Call<PlateNumberModel?>?
 
     @POST("Member/ChargeGas.php")
     fun charge(@Body requestBody:VerifyBody?): Call<ChargeModel?>?
