@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
+import android.util.Log
 import com.google.zxing.Result
 import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitResp
 import com.interactive.ksi.propertyturkeybooking.retrofitconfig.HandelCalls
@@ -17,6 +18,7 @@ import com.quekitapp.gasloyalty.models.ScanModel
 import com.quekitapp.gasloyalty.models.VerifyBody
 import com.quekitapp.gasloyalty.models.VerifyPlate
 import com.sdsmdg.tastytoast.TastyToast
+import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.activity_charge_layout.*
 import kotlinx.android.synthetic.main.activity_scan_qr.*
 import kotlinx.android.synthetic.main.activity_scan_qr.backBtn
@@ -124,11 +126,27 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
         super.onActivityResult(requestCode, resultCode, data)
         EasyImage.handleActivityResult(requestCode, resultCode, data, this, object : DefaultCallback() {
             override fun onImagePicked(imageFile: File, source: EasyImage.ImageSource, type: Int) {
-                val uri= Uri.fromFile(imageFile)
-                val imageStream = contentResolver.openInputStream(uri)
+                val uri = Uri.fromFile(imageFile)
+
+                val filePath: String = uri.getPath()!!
+
+                val file = File(filePath)
+                val file_size = (file.length() / 1024).toString().toInt().toDouble()
+                val fileSizeMB = file_size / 1024
+                Log.e("size_before", fileSizeMB.toString()+" mb ")
+
+                val compressedImage = Compressor(this@ScanQrActivity).compressToFile(file)
+                val compressfile_size = (compressedImage.length() / 1024).toString().toInt().toDouble()
+                val compressfileSizeMB = compressfile_size / 1024
+                Log.e("size_after", compressfileSizeMB.toString()+" mb ")
+
+                val imageStream = contentResolver.openInputStream(Uri.fromFile(compressedImage))
                 val selectedImage = BitmapFactory.decodeStream(imageStream)
                 val encodedImage: String? = encodeImage(selectedImage)
-                val verifybody= VerifyPlate(encodedImage!!)
+                val verifybody = VerifyPlate(encodedImage!!)
+
+                Log.e("image", verifybody.snapshot!!)
+                Log.e("json", verifybody.toString()!!)
 
 
 
