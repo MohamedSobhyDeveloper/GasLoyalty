@@ -67,7 +67,6 @@ class HandelCalls {
 
     /*
     public void callURL(final String flag, String url) {
-
         if (flag.equals(DataEnum.call_get_Document_Url.name())) {
             Call<DocumentsModel> call = restRetrofit.getClientService().getDocuments(url);
             callRetrofit(call, flag);
@@ -75,19 +74,12 @@ class HandelCalls {
             Call<DocumentDetailsModel> call = restRetrofit.getClientService().getDocumentDetails(url);
             callRetrofit(call, flag);
         }
-
     }
-
-
-
     public void callWithImage(final String flag, @PartMap() Map<String, RequestBody> partMap, @Part MultipartBody.Part postImage) {
         if (flag.equals(DataEnum.call_update_profile.name())) {
-
             Call<ModelUpdateProfile> call = restRetrofit.getClientService().updateProfile(partMap, postImage);
             callRetrofit(call, flag);
         }
-
-
     }
     */
 

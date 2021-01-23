@@ -9,6 +9,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
 import android.view.View
@@ -25,6 +26,7 @@ import com.quekitapp.gasloyalty.models.PlateNumberModel
 import com.quekitapp.gasloyalty.models.VerifyPlate
 import com.quekitapp.gasloyalty.utlitites.SetupLanguage
 import com.tbruyelle.rxpermissions2.RxPermissions
+import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -37,6 +39,7 @@ import java.io.File
 
 class HomeActivity : BaseActivity(),HandleRetrofitResp {
     var dialog: BottomSheetDialog? = null
+    private val CAMERA_REQUEST = 1888
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,8 +95,7 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
 
                 PrefsUtil.with(this).add("language", "en").apply()
                 SetupLanguage.checkLanguage("en", this)
-                val intent =
-                        Intent(this, SplashActivity::class.java)
+                val intent = Intent(this, SplashActivity::class.java)
                 startActivity(intent)
                 finish()
             }
@@ -105,8 +107,7 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
             if (PrefsUtil.with(this).get("language", "ar").equals("en")){
                 PrefsUtil.with(this).add("language", "ar").apply()
                 SetupLanguage.checkLanguage("ar", this)
-                val intent =
-                        Intent(this, SplashActivity::class.java)
+                val intent = Intent(this, SplashActivity::class.java)
                 startActivity(intent)
                 finish()
             }
@@ -156,10 +157,23 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
         EasyImage.handleActivityResult(requestCode, resultCode, data, this, object : DefaultCallback() {
             override fun onImagePicked(imageFile: File, source: EasyImage.ImageSource, type: Int) {
                 val uri = Uri.fromFile(imageFile)
-                val imageStream = contentResolver.openInputStream(uri)
+
+                val filePath: String = uri.getPath()!!
+
+                val file = File(filePath)
+                val file_size = (file.length() / 1024).toString().toInt().toDouble()
+                val fileSizeMB = file_size / 1024
+                Log.e("size_before", fileSizeMB.toString()+" mb ")
+
+                val compressedImage = Compressor(this@HomeActivity).compressToFile(file)
+                val compressfile_size = (compressedImage.length() / 1024).toString().toInt().toDouble()
+                val compressfileSizeMB = compressfile_size / 1024
+                Log.e("size_after", compressfileSizeMB.toString()+" mb ")
+
+                val imageStream = contentResolver.openInputStream(Uri.fromFile(compressedImage))
                 val selectedImage = BitmapFactory.decodeStream(imageStream)
                 val encodedImage: String? = encodeImage(selectedImage)
-                val verifybody= VerifyPlate(encodedImage!!)
+                val verifybody = VerifyPlate(encodedImage!!)
 
                 Log.e("image", verifybody.snapshot!!)
                 Log.e("json", verifybody.toString()!!)
@@ -168,6 +182,9 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
 
             }
         })
+
+
+
     }
 
     private fun encodeImage(bm: Bitmap): String? {
@@ -176,6 +193,7 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
         val b: ByteArray = baos.toByteArray()
         return Base64.encodeToString(b, Base64.DEFAULT)
     }
+
 
 
 

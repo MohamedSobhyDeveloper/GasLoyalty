@@ -1,3 +1,4 @@
+
 package com.interactive.ksi.propertyturkeybooking.retrofitconfig
 
 import android.content.Context
@@ -6,6 +7,7 @@ import android.util.Log
 import com.interactive.ksi.propertyturkeybooking.utlitites.Constant
 import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
 import com.interactive.ksi.propertyturkeybooking.utlitites.PrefsUtil.with
+import com.quekitapp.gasloyalty.retrofit.ApiCall
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
@@ -80,6 +82,6 @@ class RestRetrofit private constructor() {
     }
 
     fun getClientService(): ApiCall {
-         return clientService
+        return clientService
     }
 }
