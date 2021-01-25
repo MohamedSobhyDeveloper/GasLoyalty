@@ -175,6 +175,7 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
                 val encodedImage: String? = encodeImage(selectedImage)
                 val verifybody = VerifyPlate(encodedImage!!)
 
+                Log.e("image", encodedImage)
                 Log.e("image", verifybody.snapshot!!)
                 Log.e("json", verifybody.toString()!!)
 
