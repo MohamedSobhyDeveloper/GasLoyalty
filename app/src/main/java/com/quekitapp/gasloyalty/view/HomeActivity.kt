@@ -129,7 +129,6 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
 
             dialog?.show()
 
-
         }
 
         logout.setOnClickListener {
