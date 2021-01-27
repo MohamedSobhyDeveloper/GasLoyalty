@@ -28,7 +28,7 @@
     <string name="charge">Charge</string>
     <string name="no_data_found_for_this_tank">Sorry no data found for this tank</string>
     <string name="verify">verify</string>
-    <string name="cnt_verify_plate_num">Cant Verify Plate No</string>
+    <string name="cnt_verify_plate_num">Can not Verify Plate No</string>
     <string name="enter_metetrs">Enter metetrs</string>
     <string name="enter_amount">Enter Amount</string>
     <string name="submit">Submit</string>
@@ -38,5 +38,8 @@
     <string name="enter_verification_code">Enter Verification Code</string>
     <string name="error_verify_code">error in verification code please try again</string>
     <string name="charged_successfully">charged successfully</string>
+    <string name="maintenance_date">Maintenance Date :</string>
+    <string name="please_review_gas_pipe_maintenance">Please review gas pipe maintenance</string>
+    <string name="no_data_found_for_this_palte_number">No data found for this palte number</string>
 
 </resources>

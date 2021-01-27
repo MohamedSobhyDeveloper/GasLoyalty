@@ -19,10 +19,8 @@ import android.widget.TextView
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.quekitapp.gasloyalty.R
-import com.quekitapp.gasloyalty.models.PlateNumberModel
 import com.quekitapp.gasloyalty.models.ScanModel
 import com.sdsmdg.tastytoast.TastyToast
-import java.net.ConnectException
 import java.util.*
 
 /**
@@ -157,7 +155,7 @@ class HelpMe {
 
 
     @SuppressLint("SetTextI18n")
-    fun infoDialog(scanmodel:ScanModel, viewListenerInterface:ViewListenerInterface) {
+    fun infoDialog(scanmodel:ScanModel,fromHome:Boolean, viewListenerInterface:ViewListenerInterface) {
         val dialogView = Dialog(context!!)
         dialogView.setContentView(R.layout.customer_layout_info_dialog)
         dialogView.setCanceledOnTouchOutside(false)
@@ -170,6 +168,9 @@ class HelpMe {
         val plate_tv = dialogView.findViewById<TextView>(R.id.plate_tv)
         val tank_tv = dialogView.findViewById<TextView>(R.id.tank_tv)
         val blance_tv = dialogView.findViewById<TextView>(R.id.blance_tv)
+        val maintenance_tv = dialogView.findViewById<TextView>(R.id.maintenance_tv)
+        val maintenance_info = dialogView.findViewById<TextView>(R.id.maintenance_info)
+
         val closeBtn = dialogView.findViewById<TextView>(R.id.closeBtn)
         closeBtn.setOnClickListener { view: View? -> dialogView.dismiss() }
         mobile_tv.text=scanmodel.mobile
@@ -177,6 +178,19 @@ class HelpMe {
         plate_tv.text=scanmodel.plate_no
         tank_tv.text=scanmodel.tag_id
         blance_tv.text=scanmodel.balance
+        maintenance_tv.text=scanmodel.maintenance_date
+
+        if (scanmodel.valid.equals("-1")){
+            maintenance_info.visibility=View.VISIBLE
+            charge_btn.visibility=View.GONE
+        }else{
+            maintenance_info.visibility=View.GONE
+            charge_btn.visibility=View.VISIBLE
+        }
+
+        if (fromHome){
+            verify_btn.visibility=View.GONE
+        }
 
         charge_btn.setOnClickListener {
             dialogView.dismiss()
@@ -193,7 +207,7 @@ class HelpMe {
 
 
     @SuppressLint("SetTextI18n")
-    fun verifyPlateDialog(platenumber: PlateNumberModel) {
+    fun verifyPlateDialog(platenumber: ScanModel,notshow:Boolean) {
         val dialogView = Dialog(context!!)
         dialogView.setContentView(R.layout.verify_plate_dialog)
         dialogView.setCanceledOnTouchOutside(true)
@@ -201,18 +215,23 @@ class HelpMe {
         dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         val plate_tv = dialogView.findViewById<TextView>(R.id.plate_tv)
+        val plate_info = dialogView.findViewById<TextView>(R.id.no_info)
 
         val closeBtn = dialogView.findViewById<TextView>(R.id.closeBtn)
         closeBtn.setOnClickListener { view: View? -> dialogView.dismiss() }
 
         if (!platenumber.plate_no.equals("-1")){
            plate_tv.text=platenumber.plate_no
+            plate_info.visibility=View.VISIBLE
         }else{
            plate_tv.text= context!!.getString(R.string.cnt_verify_plate_num)
+            plate_info.visibility=View.GONE
+
         }
+        if (notshow){
+            plate_info.visibility=View.GONE
 
-
-
+        }
 
         dialogView.show()
     }

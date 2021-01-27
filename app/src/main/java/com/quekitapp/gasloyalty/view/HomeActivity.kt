@@ -9,7 +9,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
 import android.view.View
@@ -22,7 +21,7 @@ import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
 import com.interactive.ksi.propertyturkeybooking.utlitites.HelpMe
 import com.interactive.ksi.propertyturkeybooking.utlitites.PrefsUtil
 import com.quekitapp.gasloyalty.R
-import com.quekitapp.gasloyalty.models.PlateNumberModel
+import com.quekitapp.gasloyalty.models.ScanModel
 import com.quekitapp.gasloyalty.models.VerifyPlate
 import com.quekitapp.gasloyalty.utlitites.SetupLanguage
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -206,8 +205,27 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
     }
 
     override fun onResponseSuccess(flag: String?, o: Any?) {
-        val plateNumberModel: PlateNumberModel = o as PlateNumberModel
-          HelpMe.getInstance(this)?.verifyPlateDialog(plateNumberModel)
+        val plateNumberModel: ScanModel = o as ScanModel
+
+        if (plateNumberModel.pk.equals("-1")){
+            HelpMe.getInstance(this)?.verifyPlateDialog(plateNumberModel,false)
+
+        }else{
+            HelpMe.getInstance(this)?.infoDialog(plateNumberModel,true,object : HelpMe.ViewListenerInterface {
+                override fun clickView() {
+                    val intent = Intent(this@HomeActivity, ChargeActivity::class.java)
+                    intent.putExtra("mobile", plateNumberModel.mobile)
+                    startActivity(intent)
+                }
+
+                override fun verifyclickView() {
+//                    EasyImage.openCamera(this@HomeActivity, 0)
+
+                }
+
+            })
+
+        }
 
     }
 

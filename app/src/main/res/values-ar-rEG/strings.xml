@@ -39,5 +39,8 @@
     <string name="enter_verification_code">ادخل رمز التحقق</string>
     <string name="error_verify_code">خطأ في رمز التحقق يرجى المحاولة مرة أخرى</string>
     <string name="charged_successfully">تم الشحن بنجاح</string>
+    <string name="maintenance_date">تاريخ الصيانة :</string>
+    <string name="please_review_gas_pipe_maintenance">الرجاء مراجعة صيانة انبوبة الغاز</string>
+    <string name="no_data_found_for_this_palte_number">لم يتم العثور على بيانات لرقم اللوحة هذا</string>
 
 </resources>

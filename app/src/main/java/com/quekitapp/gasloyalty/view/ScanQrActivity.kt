@@ -13,13 +13,10 @@ import com.interactive.ksi.propertyturkeybooking.retrofitconfig.HandelCalls
 import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
 import com.interactive.ksi.propertyturkeybooking.utlitites.HelpMe
 import com.quekitapp.gasloyalty.R
-import com.quekitapp.gasloyalty.models.PlateNumberModel
 import com.quekitapp.gasloyalty.models.ScanModel
-import com.quekitapp.gasloyalty.models.VerifyBody
 import com.quekitapp.gasloyalty.models.VerifyPlate
 import com.sdsmdg.tastytoast.TastyToast
 import id.zelory.compressor.Compressor
-import kotlinx.android.synthetic.main.activity_charge_layout.*
 import kotlinx.android.synthetic.main.activity_scan_qr.*
 import kotlinx.android.synthetic.main.activity_scan_qr.backBtn
 import me.dm7.barcodescanner.zxing.ZXingScannerView
@@ -76,7 +73,7 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
             TastyToast.makeText(this,getString(R.string.no_data_found_for_this_tank), TastyToast.LENGTH_SHORT, TastyToast.ERROR)
 
         }else{
-            HelpMe.getInstance(this)?.infoDialog(scanModel,object : HelpMe.ViewListenerInterface{
+            HelpMe.getInstance(this)?.infoDialog(scanModel,false,object : HelpMe.ViewListenerInterface{
                 override fun clickView() {
                     val intent = Intent(this@ScanQrActivity, ChargeActivity::class.java)
                     intent.putExtra("mobile", scanModel.mobile)
@@ -91,8 +88,8 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
             })
         }
         }else{
-            val plateNumberModel: PlateNumberModel = o as PlateNumberModel
-            HelpMe.getInstance(this)?.verifyPlateDialog(plateNumberModel)
+            val plateNumberModel: ScanModel = o as ScanModel
+            HelpMe.getInstance(this)?.verifyPlateDialog(plateNumberModel,true)
         }
 
 
