@@ -39,7 +39,7 @@
     <string name="error_verify_code">error in verification code please try again</string>
     <string name="charged_successfully">charged successfully</string>
     <string name="maintenance_date">Maintenance Date :</string>
-    <string name="please_review_gas_pipe_maintenance">Please review gas pipe maintenance</string>
-    <string name="no_data_found_for_this_palte_number">No data found for this palte number</string>
+    <string name="please_review_gas_pipe_maintenance">Please review gas cylinder maintenance</string>
+    <string name="no_data_found_for_this_palte_number">No data found for plate number</string>
 
 </resources>
