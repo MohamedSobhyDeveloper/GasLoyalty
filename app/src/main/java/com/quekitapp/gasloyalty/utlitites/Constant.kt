@@ -27,7 +27,7 @@ class Constant {
 
         //online
         @JvmField
-        var baseUrl = "https://www.parking.openparkdc.com/RestAPI/api/"
+        var baseUrl = "https://www.parking.open-park.com/RestAPI/api/"
         @JvmField
         var Currancy = "http://api.propertyturkey.com/api/v1/currency?api_key=" + apiValue
 
