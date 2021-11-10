@@ -41,5 +41,7 @@
     <string name="maintenance_date">Maintenance Date :</string>
     <string name="please_review_gas_pipe_maintenance">Please review gas cylinder maintenance</string>
     <string name="no_data_found_for_this_palte_number">No data found for plate number</string>
+    <string name="update_plate_number">Update Plate Number</string>
+    <string name="verifed_plate_num">Plate Number Verified You Can Charge now</string>
 
 </resources>

@@ -76,8 +76,10 @@ class HelpMe {
         Locale.setDefault(locale)
         val config = Configuration()
         config.locale = locale
-        context!!.resources.updateConfiguration(config,
-                context!!.resources.displayMetrics)
+        context!!.resources.updateConfiguration(
+            config,
+            context!!.resources.displayMetrics
+        )
     }
 
     fun hideKeyBoard(act: Activity) {
@@ -137,8 +139,13 @@ class HelpMe {
 //        if (t is ConnectException) {
 //            TastyToast.makeText(context, t.message, TastyToast.LENGTH_LONG, TastyToast.ERROR)
 //        } else {
-            TastyToast.makeText(context, context!!.getString(R.string.check_connections), TastyToast.LENGTH_LONG, TastyToast.ERROR)
-            Log.e("errrr", t.message!!)
+        TastyToast.makeText(
+            context,
+            context!!.getString(R.string.check_connections),
+            TastyToast.LENGTH_LONG,
+            TastyToast.ERROR
+        )
+        Log.e("errrr", t.message!!)
 //        }
     }
 
@@ -155,7 +162,12 @@ class HelpMe {
 
 
     @SuppressLint("SetTextI18n")
-    fun infoDialog(scanmodel:ScanModel,fromHome:Boolean, viewListenerInterface:ViewListenerInterface) {
+    fun infoDialog(
+        scanmodel: ScanModel,
+        verifyPlateNum: Boolean,
+        fromHome: Boolean,
+        viewListenerInterface: ViewListenerInterface
+    ) {
         val dialogView = Dialog(context!!)
         dialogView.setContentView(R.layout.customer_layout_info_dialog)
         dialogView.setCanceledOnTouchOutside(false)
@@ -173,23 +185,31 @@ class HelpMe {
 
         val closeBtn = dialogView.findViewById<TextView>(R.id.closeBtn)
         closeBtn.setOnClickListener { view: View? -> dialogView.dismiss() }
-        mobile_tv.text=scanmodel.mobile
-        name_tv.text=scanmodel.name
-        plate_tv.text=scanmodel.plate_no
-        tank_tv.text=scanmodel.tag_id
-        blance_tv.text=scanmodel.balance
-        maintenance_tv.text=scanmodel.maintenance_date
+        mobile_tv.text = scanmodel.mobile
+        name_tv.text = scanmodel.name
+        plate_tv.text = scanmodel.plate_no
+        tank_tv.text = scanmodel.tag_id
+        blance_tv.text = scanmodel.balance
+        maintenance_tv.text = scanmodel.maintenance_date
 
-        if (scanmodel.valid.equals("-1")){
-            maintenance_info.visibility=View.VISIBLE
-            charge_btn.visibility=View.GONE
-        }else{
-            maintenance_info.visibility=View.GONE
-            charge_btn.visibility=View.VISIBLE
+        if (scanmodel.valid.equals("-1")) {
+            maintenance_info.visibility = View.VISIBLE
+            charge_btn.visibility = View.GONE
+        } else {
+            maintenance_info.visibility = View.GONE
+
+            if (verifyPlateNum) {
+                charge_btn.visibility = View.VISIBLE
+
+            } else {
+                charge_btn.visibility = View.GONE
+            }
+
+
         }
 
-        if (fromHome){
-            verify_btn.visibility=View.GONE
+        if (fromHome) {
+            verify_btn.visibility = View.GONE
         }
 
         charge_btn.setOnClickListener {
@@ -207,7 +227,7 @@ class HelpMe {
 
 
     @SuppressLint("SetTextI18n")
-    fun verifyPlateDialog(platenumber: ScanModel,notshow:Boolean) {
+    fun verifyPlateDialog(sacnplatenumber: ScanModel, notshow: Boolean) {
         val dialogView = Dialog(context!!)
         dialogView.setContentView(R.layout.verify_plate_dialog)
         dialogView.setCanceledOnTouchOutside(true)
@@ -216,20 +236,24 @@ class HelpMe {
 
         val plate_tv = dialogView.findViewById<TextView>(R.id.plate_tv)
         val plate_info = dialogView.findViewById<TextView>(R.id.no_info)
+        val updateplatebtn = dialogView.findViewById<TextView>(R.id.updateplatebtn)
 
         val closeBtn = dialogView.findViewById<TextView>(R.id.closeBtn)
         closeBtn.setOnClickListener { view: View? -> dialogView.dismiss() }
 
-        if (!platenumber.plate_no.equals("-1")){
-           plate_tv.text=platenumber.plate_no
-            plate_info.visibility=View.VISIBLE
-        }else{
-           plate_tv.text= context!!.getString(R.string.cnt_verify_plate_num)
-            plate_info.visibility=View.GONE
+        if (!sacnplatenumber.plate_no.equals("-1")) {
+            plate_tv.text = sacnplatenumber.plate_no
+            plate_info.visibility = View.VISIBLE
+            updateplatebtn.visibility=View.VISIBLE
+
+        } else {
+            plate_tv.visibility = View.VISIBLE
+            plate_tv.text = context!!.getString(R.string.cnt_verify_plate_num)
+            plate_info.visibility = View.GONE
 
         }
-        if (notshow){
-            plate_info.visibility=View.GONE
+        if (notshow) {
+            plate_info.visibility = View.GONE
 
         }
 
@@ -238,7 +262,7 @@ class HelpMe {
 
 
     @SuppressLint("SetTextI18n")
-    fun verifycodeDialog(viewListenerInterface:ViewListenerVerifyInterface) {
+    fun verifycodeDialog(viewListenerInterface: ViewListenerVerifyInterface) {
         val dialogView = Dialog(context!!)
         dialogView.setContentView(R.layout.verify_code_dialog)
         dialogView.setCanceledOnTouchOutside(true)
@@ -252,23 +276,16 @@ class HelpMe {
         closeBtn.setOnClickListener { view: View? -> dialogView.dismiss() }
 
         submit.setOnClickListener {
-            if (verifyCode.text.isEmpty()){
-                verifyCode.error=context!!.getString(R.string.enter_verification_code)
-            }else{
-                  viewListenerInterface.clickView(verifyCode.text.toString())
+            if (verifyCode.text.isEmpty()) {
+                verifyCode.error = context!!.getString(R.string.enter_verification_code)
+            } else {
+                viewListenerInterface.clickView(verifyCode.text.toString())
             }
         }
 
 
-
-
-
-
         dialogView.show()
     }
-
-
-
 
 
     interface ViewListenerInterface {
@@ -278,7 +295,7 @@ class HelpMe {
     }
 
     interface ViewListenerVerifyInterface {
-        fun clickView(code:String)
+        fun clickView(code: String)
     }
 
     companion object {

@@ -115,6 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/plate_no"
+                android:visibility="gone"
                 android:textColor="@color/black"
                 />
 
@@ -123,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/plate_tv"
                 tools:text="ا ف ف 8 1 6"
+                android:visibility="gone"
                 android:layout_marginStart="5dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="5dp" />

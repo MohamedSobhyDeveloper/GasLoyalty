@@ -211,7 +211,7 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
             HelpMe.getInstance(this)?.verifyPlateDialog(plateNumberModel,false)
 
         }else{
-            HelpMe.getInstance(this)?.infoDialog(plateNumberModel,true,object : HelpMe.ViewListenerInterface {
+            HelpMe.getInstance(this)?.infoDialog(plateNumberModel, true, true, object : HelpMe.ViewListenerInterface {
                 override fun clickView() {
                     val intent = Intent(this@HomeActivity, ChargeActivity::class.java)
                     intent.putExtra("mobile", plateNumberModel.mobile)

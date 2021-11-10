@@ -42,5 +42,7 @@
     <string name="maintenance_date">تاريخ الصيانة :</string>
     <string name="please_review_gas_pipe_maintenance">الرجاء مراجعة صيانة اسطوانة الغاز</string>
     <string name="no_data_found_for_this_palte_number">لم يتم العثور على بيانات لرقم اللوحة</string>
+    <string name="update_plate_number">تعديل بيانات اللوحة</string>
+    <string name="verifed_plate_num">تم التحقق من رقم اللوحة يمكنك الشحن الان</string>
 
 </resources>

@@ -31,6 +31,8 @@ import java.io.File
 import java.util.HashMap
 
 class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetrofitResp {
+    lateinit var scanModel: ScanModel
+    lateinit var plateNumberModel: ScanModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan_qr)
@@ -67,32 +69,42 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
 
         if (flag==DataEnum.scan.name){
 
-        val scanModel: ScanModel = o as ScanModel
+         scanModel = o as ScanModel
 
         if (scanModel.pk.equals("-1")){
             TastyToast.makeText(this,getString(R.string.no_data_found_for_this_tank), TastyToast.LENGTH_SHORT, TastyToast.ERROR)
 
         }else{
-            HelpMe.getInstance(this)?.infoDialog(scanModel,false,object : HelpMe.ViewListenerInterface{
-                override fun clickView() {
-                    val intent = Intent(this@ScanQrActivity, ChargeActivity::class.java)
-                    intent.putExtra("mobile", scanModel.mobile)
-                    startActivity(intent)
-                }
-
-                override fun verifyclickView() {
-                    EasyImage.openCamera(this@ScanQrActivity, 0)
-
-                }
-
-            })
+          showInfoDialog(scanModel,false)
         }
         }else{
-            val plateNumberModel: ScanModel = o as ScanModel
-            HelpMe.getInstance(this)?.verifyPlateDialog(plateNumberModel,true)
+            plateNumberModel = o as ScanModel
+
+            if (scanModel.plate_no.equals(plateNumberModel.plate_no)) {
+                TastyToast.makeText(this,getString(R.string.verifed_plate_num), TastyToast.LENGTH_SHORT, TastyToast.ERROR)
+                showInfoDialog(scanModel,true)
+
+            } else {
+                HelpMe.getInstance(this)?.verifyPlateDialog(plateNumberModel,true)
+            }
         }
 
 
+    }
+
+    private fun showInfoDialog(scanModel: ScanModel,verifyPlateNum:Boolean) {
+        HelpMe.getInstance(this)?.infoDialog(scanModel,verifyPlateNum,false,object : HelpMe.ViewListenerInterface{
+            override fun clickView() {
+                val intent = Intent(this@ScanQrActivity, ChargeActivity::class.java)
+                intent.putExtra("mobile", scanModel.mobile)
+                startActivity(intent)
+            }
+
+            override fun verifyclickView() {
+                EasyImage.openCamera(this@ScanQrActivity, 0)
+            }
+
+        })
     }
 
     override fun onResponseFailure(flag: String?, o: String?) {
