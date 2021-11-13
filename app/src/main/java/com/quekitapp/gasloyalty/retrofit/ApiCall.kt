@@ -22,6 +22,11 @@ interface ApiCall {
     @POST("Member/ChargeGas.php")
     fun charge(@Body requestBody: VerifyBody?): Call<ChargeModel?>?
 
+
+    @POST("Member/UpdateRecognizedRecord.php")
+    fun updatePlate(@Body requestBody: UpdatePlateBody?): Call<ChargeModel?>?
+
+
     @POST("User/VerifyOTP.php")
     fun verify(@Body requestBody: VerifyBody?): Call<VerifyModel?>?
 }

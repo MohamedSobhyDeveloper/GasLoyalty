@@ -32,7 +32,7 @@ class LoginActivity : BaseActivity() ,HandleRetrofitResp{
                 meMap["username"] = username.text.toString()
                 meMap["password"] = password.text.toString()
 
-                HandelCalls.getInstance(this)?.call(DataEnum.login.name, meMap, null,true, this)
+                HandelCalls.getInstance(this)?.call(DataEnum.login.name, meMap, null,null,true, this)
 
             }
 

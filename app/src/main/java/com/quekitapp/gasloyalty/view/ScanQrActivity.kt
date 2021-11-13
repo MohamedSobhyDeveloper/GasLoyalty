@@ -14,6 +14,7 @@ import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
 import com.interactive.ksi.propertyturkeybooking.utlitites.HelpMe
 import com.quekitapp.gasloyalty.R
 import com.quekitapp.gasloyalty.models.ScanModel
+import com.quekitapp.gasloyalty.models.UpdatePlateBody
 import com.quekitapp.gasloyalty.models.VerifyPlate
 import com.sdsmdg.tastytoast.TastyToast
 import id.zelory.compressor.Compressor
@@ -77,6 +78,8 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
         }else{
           showInfoDialog(scanModel,false)
         }
+        }else if (flag==DataEnum.updatePlate.name){
+
         }else{
             plateNumberModel = o as ScanModel
 
@@ -85,10 +88,41 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
                 showInfoDialog(scanModel,true)
 
             } else {
-                HelpMe.getInstance(this)?.verifyPlateDialog(plateNumberModel,true)
+                HelpMe.getInstance(this)?.verifyPlateDialog(plateNumberModel,true,object :
+                    HelpMe.ViewListenerInterface {
+                    override fun clickView() {
+                        HelpMe.getInstance(this@ScanQrActivity)?.updatePlate(object :
+                            HelpMe.ViewListenerUpdatePlateInterface {
+                            override fun clickView(
+                                chr1: String,
+                                chr2: String,
+                                chr3: String,
+                                num1: String,
+                                num2: String,
+                                num3: String,
+                                num4: String
+                            ) {
+                                val item=UpdatePlateBody("",chr1,chr2,chr3,num1,num2,num3,num4)
+                                updatePlate(item)
+
+                            }
+
+                        })
+                    }
+
+                    override fun verifyclickView() {
+
+                    }
+
+                })
             }
         }
 
+
+    }
+
+    private fun updatePlate(item: UpdatePlateBody) {
+        HandelCalls.getInstance(this)?.call(DataEnum.updatePlate.name, null, null,item,true, this)
 
     }
 
@@ -121,12 +155,10 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler,HandleRetr
 
     override fun handleResult(result: Result?) {
        val tank_id = result!!.text
-
         if (!tank_id.isEmpty()){
             val meMap = HashMap<String, String?>()
             meMap["tankid"] = tank_id
-            HandelCalls.getInstance(this)?.call(DataEnum.scan.name, meMap, null,true, this)
-
+            HandelCalls.getInstance(this)?.call(DataEnum.scan.name, meMap, null,null,true, this)
         }
     }
 

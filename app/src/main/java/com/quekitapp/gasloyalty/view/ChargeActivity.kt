@@ -43,7 +43,7 @@ class ChargeActivity : BaseActivity(),HandleRetrofitResp {
                meMap["quantity"] = meters.text.toString()
                val chargebody=VerifyBody(intent.getStringExtra("mobile")!!,amount.text.toString(),meters.text.toString(),"")
 
-               HandelCalls.getInstance(this)?.call(DataEnum.charge.name, meMap,chargebody, true, this)
+               HandelCalls.getInstance(this)?.call(DataEnum.charge.name, meMap,chargebody,null, true, this)
 
             }
 
@@ -64,7 +64,7 @@ class ChargeActivity : BaseActivity(),HandleRetrofitResp {
                       meMap["payment_amount"] = amount.text.toString()
                       meMap["quantity"] = meters.text.toString()
                       val verifybody=VerifyBody(intent.getStringExtra("mobile")!!,amount.text.toString(),meters.text.toString(),code)
-                      HandelCalls.getInstance(this@ChargeActivity)?.call(DataEnum.verify.name, meMap, verifybody,true, this@ChargeActivity)
+                      HandelCalls.getInstance(this@ChargeActivity)?.call(DataEnum.verify.name, meMap, verifybody,null,true, this@ChargeActivity)
 
                   }
 

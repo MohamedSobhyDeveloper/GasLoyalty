@@ -6,6 +6,7 @@ import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitResp
 import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitRespAdapter
 import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
 import com.interactive.ksi.propertyturkeybooking.utlitites.HelpMe
+import com.quekitapp.gasloyalty.models.UpdatePlateBody
 import com.quekitapp.gasloyalty.models.VerifyBody
 import com.quekitapp.gasloyalty.models.VerifyPlate
 import com.quekitapp.gasloyalty.utlitites.Loading
@@ -36,7 +37,7 @@ class HandelCalls {
         this.onRespnseAdapter = onRespnseAdapter
     }
 
-    fun call(flag: String, meMap: HashMap<String, String?>?, verifyBody: VerifyBody?, ShowLoadingDialog: Boolean, onRespnseSucess: HandleRetrofitResp) {
+    fun call(flag: String, meMap: HashMap<String, String?>?, verifyBody: VerifyBody?,updatePlate: UpdatePlateBody?, ShowLoadingDialog: Boolean, onRespnseSucess: HandleRetrofitResp) {
         onRespnse = onRespnseSucess
 
         if (flag==DataEnum.login.name){
@@ -52,6 +53,11 @@ class HandelCalls {
 
         }else if (flag==DataEnum.verify.name){
             callRetrofit(restRetrofit!!.getClientService().verify(verifyBody), flag, ShowLoadingDialog)
+
+        }
+        else if (flag==DataEnum.updatePlate.name){
+
+            callRetrofit(restRetrofit!!.getClientService().updatePlate(updatePlate), flag, ShowLoadingDialog)
 
         }
 

@@ -218,6 +218,7 @@ class HelpMe {
         }
 
         verify_btn.setOnClickListener {
+            dialogView.dismiss()
             viewListenerInterface.verifyclickView()
         }
 
@@ -227,7 +228,11 @@ class HelpMe {
 
 
     @SuppressLint("SetTextI18n")
-    fun verifyPlateDialog(sacnplatenumber: ScanModel, notshow: Boolean) {
+    fun verifyPlateDialog(
+        sacnplatenumber: ScanModel,
+        notshow: Boolean,
+        clickview: ViewListenerInterface
+    ) {
         val dialogView = Dialog(context!!)
         dialogView.setContentView(R.layout.verify_plate_dialog)
         dialogView.setCanceledOnTouchOutside(true)
@@ -244,7 +249,7 @@ class HelpMe {
         if (!sacnplatenumber.plate_no.equals("-1")) {
             plate_tv.text = sacnplatenumber.plate_no
             plate_info.visibility = View.VISIBLE
-            updateplatebtn.visibility=View.VISIBLE
+            updateplatebtn.visibility = View.VISIBLE
 
         } else {
             plate_tv.visibility = View.VISIBLE
@@ -255,6 +260,9 @@ class HelpMe {
         if (notshow) {
             plate_info.visibility = View.GONE
 
+        }
+        updateplatebtn.setOnClickListener {
+            clickview.clickView()
         }
 
         dialogView.show()
@@ -287,6 +295,46 @@ class HelpMe {
         dialogView.show()
     }
 
+    @SuppressLint("SetTextI18n")
+    fun updatePlate(viewListenerInterface: ViewListenerUpdatePlateInterface) {
+        val dialogView = Dialog(context!!)
+        dialogView.setContentView(R.layout.update_plate_dialog)
+        dialogView.setCanceledOnTouchOutside(true)
+        dialogView.setCancelable(true)
+        dialogView.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        val submit = dialogView.findViewById<Button>(R.id.submitbtn)
+        val num1 = dialogView.findViewById<EditText>(R.id.tvNum1)
+        val num2 = dialogView.findViewById<EditText>(R.id.tvNum2)
+        val num3 = dialogView.findViewById<EditText>(R.id.tvNum3)
+        val num4 = dialogView.findViewById<EditText>(R.id.tvNum4)
+        val ch1 = dialogView.findViewById<EditText>(R.id.tvCh1)
+        val ch2 = dialogView.findViewById<EditText>(R.id.tvCh2)
+        val ch3 = dialogView.findViewById<EditText>(R.id.tvCh3)
+
+        val closeBtn = dialogView.findViewById<TextView>(R.id.closeBtn)
+        closeBtn.setOnClickListener { view: View? -> dialogView.dismiss() }
+
+        submit.setOnClickListener {
+
+            if (num1.text.toString()
+                    .isNotEmpty() && num2.text.toString().isNotEmpty() && num3.text.toString()
+                    .isNotEmpty() &&
+                ch1.text.toString().isNotEmpty() && ch2.text.toString()
+                    .isNotEmpty() && ch3.text.toString().isNotEmpty()
+            ) {
+                viewListenerInterface.clickView(ch1.text.toString(),ch2.text.toString(),ch3.text.toString(),num1.text.toString(),num2.text.toString(),num3.text.toString(),num4.text.toString())
+            }else{
+                TastyToast.makeText(context, context!!.getString(R.string.enter_valid_plate), TastyToast.LENGTH_SHORT, TastyToast.ERROR)
+
+            }
+
+        }
+
+
+        dialogView.show()
+    }
+
 
     interface ViewListenerInterface {
         fun clickView()
@@ -297,6 +345,19 @@ class HelpMe {
     interface ViewListenerVerifyInterface {
         fun clickView(code: String)
     }
+
+    interface ViewListenerUpdatePlateInterface {
+        fun clickView(
+            chr1: String,
+            chr2: String,
+            chr3: String,
+            num1: String,
+            num2: String,
+            num3: String,
+            num4: String
+        )
+    }
+
 
     companion object {
         // static Uri.Builder builder;

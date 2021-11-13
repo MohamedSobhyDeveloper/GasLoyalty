@@ -43,5 +43,14 @@
     <string name="no_data_found_for_this_palte_number">No data found for plate number</string>
     <string name="update_plate_number">Update Plate Number</string>
     <string name="verifed_plate_num">Plate Number Verified You Can Charge now</string>
+    <string name="num1">num1</string>
+    <string name="num2">num2</string>
+    <string name="num3">num3</string>
+    <string name="num4">num4</string>
+    <string name="ch1">ch1</string>
+    <string name="ch3">ch3</string>
+    <string name="ch2">ch2</string>
+    <string name="update">Update</string>
+    <string name="enter_valid_plate">enter valid plate</string>
 
 </resources>

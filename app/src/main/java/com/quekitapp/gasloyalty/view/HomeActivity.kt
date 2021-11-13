@@ -208,7 +208,16 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
         val plateNumberModel: ScanModel = o as ScanModel
 
         if (plateNumberModel.pk.equals("-1")){
-            HelpMe.getInstance(this)?.verifyPlateDialog(plateNumberModel,false)
+            HelpMe.getInstance(this)?.verifyPlateDialog(plateNumberModel,false,object :
+                HelpMe.ViewListenerInterface {
+                override fun clickView() {
+
+                }
+
+                override fun verifyclickView() {
+                }
+
+            })
 
         }else{
             HelpMe.getInstance(this)?.infoDialog(plateNumberModel, true, true, object : HelpMe.ViewListenerInterface {
