@@ -52,5 +52,8 @@
     <string name="ch2">ch2</string>
     <string name="update">Update</string>
     <string name="enter_valid_plate">enter valid plate</string>
+    <string name="verify_plate">cant verify plate number</string>
+    <string name="check_data">Please Check Your data</string>
+    <string name="verify_plate_number">Verify Plate number</string>
 
 </resources>

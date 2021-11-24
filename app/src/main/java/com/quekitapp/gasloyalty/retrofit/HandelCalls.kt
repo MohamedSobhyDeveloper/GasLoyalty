@@ -5,7 +5,7 @@ import android.util.Log
 import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitResp
 import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitRespAdapter
 import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
-import com.interactive.ksi.propertyturkeybooking.utlitites.HelpMe
+import com.quekitapp.gasloyalty.utlitites.HelpMe
 import com.quekitapp.gasloyalty.models.UpdatePlateBody
 import com.quekitapp.gasloyalty.models.VerifyBody
 import com.quekitapp.gasloyalty.models.VerifyPlate
@@ -47,6 +47,8 @@ class HandelCalls {
         }else if (flag==DataEnum.scan.name){
             val tank_id = meMap!!["tankid"]
             callRetrofit(restRetrofit!!.getClientService().scan(tank_id), flag, ShowLoadingDialog)
+        }else if (flag==DataEnum.openTank.name){
+            callRetrofit(restRetrofit!!.getClientService().openTank(), flag, ShowLoadingDialog)
         }else if (flag==DataEnum.charge.name){
 
             callRetrofit(restRetrofit!!.getClientService().charge(verifyBody), flag, ShowLoadingDialog)

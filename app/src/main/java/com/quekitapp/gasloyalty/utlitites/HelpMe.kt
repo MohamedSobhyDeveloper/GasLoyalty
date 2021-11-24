@@ -1,4 +1,4 @@
-package com.interactive.ksi.propertyturkeybooking.utlitites
+package com.quekitapp.gasloyalty.utlitites
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.widget.LinearLayoutCompat
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.quekitapp.gasloyalty.R
@@ -231,7 +232,7 @@ class HelpMe {
     fun verifyPlateDialog(
         sacnplatenumber: ScanModel,
         notshow: Boolean,
-        clickview: ViewListenerInterface
+        viewListenerInterface: ViewListenerUpdatePlateInterface
     ) {
         val dialogView = Dialog(context!!)
         dialogView.setContentView(R.layout.verify_plate_dialog)
@@ -242,6 +243,14 @@ class HelpMe {
         val plate_tv = dialogView.findViewById<TextView>(R.id.plate_tv)
         val plate_info = dialogView.findViewById<TextView>(R.id.no_info)
         val updateplatebtn = dialogView.findViewById<TextView>(R.id.updateplatebtn)
+        val num1 = dialogView.findViewById<EditText>(R.id.tvNum1)
+        val num2 = dialogView.findViewById<EditText>(R.id.tvNum2)
+        val num3 = dialogView.findViewById<EditText>(R.id.tvNum3)
+        val num4 = dialogView.findViewById<EditText>(R.id.tvNum4)
+        val ch1 = dialogView.findViewById<EditText>(R.id.tvCh1)
+        val ch2 = dialogView.findViewById<EditText>(R.id.tvCh2)
+        val ch3 = dialogView.findViewById<EditText>(R.id.tvCh3)
+        val layoutPlate = dialogView.findViewById<LinearLayoutCompat>(R.id.layoutPlate)
 
         val closeBtn = dialogView.findViewById<TextView>(R.id.closeBtn)
         closeBtn.setOnClickListener { view: View? -> dialogView.dismiss() }
@@ -249,7 +258,8 @@ class HelpMe {
         if (!sacnplatenumber.plate_no.equals("-1")) {
             plate_tv.text = sacnplatenumber.plate_no
             plate_info.visibility = View.VISIBLE
-            updateplatebtn.visibility = View.VISIBLE
+//            updateplatebtn.visibility = View.VISIBLE
+//            layoutPlate.visibility=View.VISIBLE
 
         } else {
             plate_tv.visibility = View.VISIBLE
@@ -262,7 +272,17 @@ class HelpMe {
 
         }
         updateplatebtn.setOnClickListener {
-            clickview.clickView()
+            if (num1.text.toString()
+                    .isNotEmpty() && num2.text.toString().isNotEmpty() && num3.text.toString()
+                    .isNotEmpty() &&
+                ch1.text.toString().isNotEmpty() && ch2.text.toString()
+                    .isNotEmpty() && ch3.text.toString().isNotEmpty()
+            ) {
+                viewListenerInterface.clickView(ch1.text.toString(),ch2.text.toString(),ch3.text.toString(),num1.text.toString(),num2.text.toString(),num3.text.toString(),num4.text.toString())
+            }else{
+                TastyToast.makeText(context, context!!.getString(R.string.enter_valid_plate), TastyToast.LENGTH_SHORT, TastyToast.ERROR)
+
+            }
         }
 
         dialogView.show()

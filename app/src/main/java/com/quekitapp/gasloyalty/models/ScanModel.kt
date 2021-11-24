@@ -9,6 +9,7 @@ data class ScanModel(
     val ssn: String,
     val tag_id: String,
     val valid: String,
-    val maintenance_date: String
+    val maintenance_date: String,
+    val EventID:String?
 
 )

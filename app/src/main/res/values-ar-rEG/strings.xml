@@ -51,7 +51,10 @@
     <string name="ch1">ch1</string>
     <string name="ch3">ch3</string>
     <string name="ch2">ch2</string>
-    <string name="update">Update</string>
-    <string name="enter_valid_plate">enter valid plate</string>
+    <string name="update">تحديث</string>
+    <string name="enter_valid_plate">تاكد من بيانات اللوحة</string>
+    <string name="verify_plate">لم يتم التعرف على رقم اللوحة الرجاء مراجعة تعديل بيانات اللوحة</string>
+    <string name="check_data">من فضلك تاكد من البيانات</string>
+    <string name="verify_plate_number">تحقق من رقم اللوحة</string>
 
 </resources>

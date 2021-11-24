@@ -18,7 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitResp
 import com.interactive.ksi.propertyturkeybooking.retrofitconfig.HandelCalls
 import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
-import com.interactive.ksi.propertyturkeybooking.utlitites.HelpMe
+import com.quekitapp.gasloyalty.utlitites.HelpMe
 import com.interactive.ksi.propertyturkeybooking.utlitites.PrefsUtil
 import com.quekitapp.gasloyalty.R
 import com.quekitapp.gasloyalty.models.ScanModel
@@ -209,12 +209,17 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
 
         if (plateNumberModel.pk.equals("-1")){
             HelpMe.getInstance(this)?.verifyPlateDialog(plateNumberModel,false,object :
-                HelpMe.ViewListenerInterface {
-                override fun clickView() {
+                HelpMe.ViewListenerUpdatePlateInterface {
+                override fun clickView(
+                    chr1: String,
+                    chr2: String,
+                    chr3: String,
+                    num1: String,
+                    num2: String,
+                    num3: String,
+                    num4: String
+                ) {
 
-                }
-
-                override fun verifyclickView() {
                 }
 
             })

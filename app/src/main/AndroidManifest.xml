@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -16,6 +17,7 @@
         android:theme="@style/Theme.GasLoyalty"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute">
+        <activity android:name=".view.UpdatePlateActivity"></activity>
         <activity android:name=".view.BaseActivity" />
         <activity android:name=".view.ChargeActivity" />
         <activity android:name=".view.ScanQrActivity" />

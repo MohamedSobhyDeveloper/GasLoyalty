@@ -27,7 +27,7 @@ class Constant {
 
         //online
         @JvmField
-        var baseUrl = "http://106s.l.hostens.cloud/RestAPI/api/"
+        var baseUrl = "http://192.168.1.117/RestAPI/api/"
         @JvmField
         var Currancy = "http://api.propertyturkey.com/api/v1/currency?api_key=" + apiValue
 
