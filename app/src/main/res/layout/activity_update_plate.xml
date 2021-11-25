@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.UpdatePlateActivity">
-    <?xml version="1.0" encoding="utf-8"?>
 
     <LinearLayout
         android:id="@+id/toolbar"
@@ -31,13 +30,14 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/scan"
+            android:text="@string/tank_details"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:visibility="invisible" />
+            android:textAlignment="center"
+            android:visibility="visible" />
 
     </LinearLayout>
 
@@ -172,15 +172,6 @@
                     android:visibility="gone"
                     tools:text="ا ف ف 8 1 6" />
 
-                <Button
-                    android:textSize="17sp"
-                    android:id="@+id/verifyplatebtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:text="@string/verify_plate_number" />
-
 
             </LinearLayout>
 
@@ -279,12 +270,63 @@
 
 
             <Button
+                android:id="@+id/verifyplatebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/verify_plate_number"
+                android:textSize="17sp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/maintenance_layout" />
+
+            <TextView
+                android:id="@+id/success_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="@string/verifed_plate_num"
+                android:textAlignment="center"
+                android:textColor="@color/green"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/verifyplatebtn" />
+
+            <TextView
+                android:id="@+id/success_info2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="@string/can_charge_now"
+                android:textAlignment="center"
+                android:textColor="@color/green"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/success_info" />
+
+            <Button
                 android:id="@+id/chargebtn"
                 android:textSize="17sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
@@ -295,7 +337,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/maintenance_layout" />
+                app:layout_constraintTop_toBottomOf="@+id/verifyplatebtn" />
 
 
             <TextView

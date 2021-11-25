@@ -3,17 +3,17 @@ package com.interactive.ksi.propertyturkeybooking.retrofitconfig
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.util.Log
+import com.google.gson.GsonBuilder
 import com.interactive.ksi.propertyturkeybooking.utlitites.Constant
 import com.interactive.ksi.propertyturkeybooking.utlitites.DataEnum
 import com.interactive.ksi.propertyturkeybooking.utlitites.PrefsUtil.with
 import com.quekitapp.gasloyalty.retrofit.ApiCall
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+
 
 // start comment
 //import okhttp3.logging.HttpLoggingInterceptor;
@@ -72,10 +72,14 @@ class RestRetrofit private constructor() {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         builder.addInterceptor(interceptor)
 
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
+
         val httpClient = builder.build()
         val retrofit = Retrofit.Builder()
                 .baseUrl(Constant.baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(httpClient)
                 .build()
         clientService = retrofit.create(ApiCall::class.java)

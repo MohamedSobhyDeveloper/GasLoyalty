@@ -43,6 +43,7 @@
     <string name="no_data_found_for_this_palte_number">No data found for plate number</string>
     <string name="update_plate_number">Update Plate Number</string>
     <string name="verifed_plate_num">Plate Number Verified You Can Charge now</string>
+    <string name="can_charge_now">يمكنك الشحن الان</string>
     <string name="num1">num1</string>
     <string name="num2">num2</string>
     <string name="num3">num3</string>
@@ -55,5 +56,6 @@
     <string name="verify_plate">cant verify plate number</string>
     <string name="check_data">Please Check Your data</string>
     <string name="verify_plate_number">Verify Plate number</string>
+    <string name="tank_details">Tank details</string>
 
 </resources>

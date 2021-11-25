@@ -26,6 +26,7 @@ import java.io.File
 class UpdatePlateActivity : BaseActivity(), HandleRetrofitResp {
     private lateinit var plateNumberModel: ScanModel
     private lateinit var scanModel: ScanModel
+   lateinit var dialog:BottomSheetUpdatedDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -132,14 +133,27 @@ class UpdatePlateActivity : BaseActivity(), HandleRetrofitResp {
     override fun onResponseSuccess(flag: String?, o: Any?) {
         if (flag == DataEnum.updatePlate.name) {
             val data: UpdatePlateModel = o as UpdatePlateModel
-            if (data.plate_no.equals(intent.getStringExtra("plate_no"))) {
-                openTank()
+            val plate=data.plate_no.trim()
+            val oldplate=intent.getStringExtra("plate_no")?.trim() ?: ""
+            if (data.plate_no.trim() == intent.getStringExtra("plate_no")?.trim() ?: "") {
+                dialog.dismiss()
+//                TastyToast.makeText(
+//                    this,
+//                    getString(R.string.verifed_plate_num),
+//                    TastyToast.LENGTH_SHORT,
+//                    TastyToast.SUCCESS
+//                )
+                success_info.visibility=View.VISIBLE
+                success_info2.visibility=View.VISIBLE
+
+                chargebtn.visibility = View.VISIBLE
+                verifyplatebtn.visibility = View.GONE
             } else {
                 TastyToast.makeText(
                     this,
                     getString(R.string.verify_plate),
-                    TastyToast.LENGTH_SHORT,
-                    TastyToast.DEFAULT
+                    TastyToast.LENGTH_LONG,
+                    TastyToast.ERROR
                 )
 
             }
@@ -149,7 +163,7 @@ class UpdatePlateActivity : BaseActivity(), HandleRetrofitResp {
             if (data.message == "1") {
                 val intent = Intent(this@UpdatePlateActivity, ChargeActivity::class.java)
                 intent.putExtra("mobile", scanModel.mobile)
-                intent.putExtra("eventId", scanModel.EventID)
+                intent.putExtra("eventId", plateNumberModel.EventID)
                 startActivity(intent)
                 finish()
             } else {
@@ -165,23 +179,27 @@ class UpdatePlateActivity : BaseActivity(), HandleRetrofitResp {
         } else {
             plateNumberModel = o as ScanModel
 
-            if (scanModel.plate_no == plateNumberModel.plate_no) {
-                TastyToast.makeText(
-                    this,
-                    getString(R.string.verifed_plate_num),
-                    TastyToast.LENGTH_SHORT,
-                    TastyToast.ERROR
-                )
+            if (scanModel.plate_no.trim() == plateNumberModel.plate_no.trim()) {
+//                TastyToast.makeText(
+//                    this,
+//                    getString(R.string.verifed_plate_num),
+//                    TastyToast.LENGTH_SHORT,
+//                    TastyToast.SUCCESS
+//                )
+                success_info.visibility=View.VISIBLE
+                success_info2.visibility=View.VISIBLE
                 chargebtn.visibility = View.VISIBLE
+                verifyplatebtn.visibility=View.GONE
 
             } else {
 
-                BottomSheetUpdatedDialog(
-                    scanModel.EventID!!,
+                dialog= BottomSheetUpdatedDialog(
                     plateNumberModel,
                     itemSelectedAction = {
                         updatePlate(it)
                     })
+
+                dialog.show(supportFragmentManager,"dialog")
 //                HelpMe.getInstance(this)?.verifyPlateDialog(plateNumberModel, true, object :
 //                    HelpMe.ViewListenerUpdatePlateInterface {
 //                    override fun clickView(

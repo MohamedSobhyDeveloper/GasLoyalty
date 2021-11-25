@@ -28,7 +28,7 @@ interface ApiCall {
 
 
     @POST("Member/UpdateRecognizedRecord.php")
-    fun updatePlate(@Body requestBody: UpdatePlateBody?): Call<ChargeModel?>?
+    fun updatePlate(@Body requestBody: UpdatePlateBody?): Call<UpdatePlateModel?>?
 
 
     @POST("User/VerifyOTP.php")

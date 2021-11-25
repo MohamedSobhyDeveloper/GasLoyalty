@@ -9,12 +9,10 @@ import com.quekitapp.gasloyalty.R
 import com.quekitapp.gasloyalty.databinding.LayoutUpdatedDialogBinding
 import com.quekitapp.gasloyalty.models.ScanModel
 import com.quekitapp.gasloyalty.models.UpdatePlateBody
-import com.quekitapp.gasloyalty.utlitites.HelpMe
 import com.sdsmdg.tastytoast.TastyToast
 import kotlinx.android.synthetic.main.activity_update_plate.*
 
 class BottomSheetUpdatedDialog(
-    val eventInt: String,
     val sacnplatenumber: ScanModel,
     val itemSelectedAction: (data: UpdatePlateBody) -> Unit
 ) : BottomSheetDialogFragment() {
@@ -23,6 +21,7 @@ class BottomSheetUpdatedDialog(
             layoutInflater
         )
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,7 +56,7 @@ class BottomSheetUpdatedDialog(
                         .isNotEmpty() && tvCh3.text.toString().isNotEmpty()
                 ) {
                     val updatePlateBody = UpdatePlateBody(
-                        eventInt,
+                        sacnplatenumber.EventID!!,
                         tvCh1.text.toString(),
                         tvCh2.text.toString(),
                         tvCh3.text.toString(),
@@ -81,6 +80,7 @@ class BottomSheetUpdatedDialog(
 
         }
     }
+
 
 
     override fun getTheme(): Int {

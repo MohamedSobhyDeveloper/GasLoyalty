@@ -46,6 +46,7 @@ class ChargeActivity : BaseActivity(), HandleRetrofitResp {
                     intent.getStringExtra("mobile")!!,
                     amount.text.toString(),
                     meters.text.toString(),
+                    intent.getStringExtra("eventId")!!,
                     ""
                 )
 
@@ -80,6 +81,7 @@ class ChargeActivity : BaseActivity(), HandleRetrofitResp {
                                 intent.getStringExtra("mobile")!!,
                                 amount.text.toString(),
                                 meters.text.toString(),
+                                intent.getStringExtra("eventId")!!,
                                 code
                             )
                             HandelCalls.getInstance(this@ChargeActivity)?.call(

@@ -35,44 +35,74 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/error_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/verify_plate"
+            android:textAlignment="center"
+            android:textColor="@color/red"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_icon" />
+
+
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/layoutPlate"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center"
             android:layoutDirection="ltr"
             android:orientation="horizontal"
-            android:visibility="gone"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_icon"
+            app:layout_constraintTop_toBottomOf="@+id/error_info"
             tools:ignore="UnusedAttribute">
 
             <EditText
                 android:id="@+id/tvNum1"
-                android:layout_width="50dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="50dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginStart="5dp"
                 android:background="@drawable/roundedbuttonprimary"
                 android:gravity="center"
-                android:hint="@string/num1"
                 android:inputType="number"
                 android:maxLength="1"
                 android:padding="5dp"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="15sp"
-
                 tools:ignore="Autofill,RtlCompat" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="2dp"
+                android:background="@color/black"
+                />
 
             <EditText
                 android:id="@+id/tvNum2"
-                android:layout_width="50dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="50dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
                 android:background="@drawable/roundedbuttonprimary"
                 android:gravity="center"
-                android:hint="@string/num2"
                 android:inputType="number"
                 android:maxLength="1"
                 android:padding="5dp"
@@ -81,15 +111,22 @@
                 android:textSize="15sp"
 
                 tools:ignore="Autofill,RtlCompat" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="2dp"
+                android:background="@color/black"
+                />
 
             <EditText
                 android:id="@+id/tvNum3"
-                android:layout_width="50dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="50dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
                 android:background="@drawable/roundedbuttonprimary"
                 android:gravity="center"
-                android:hint="@string/num3"
                 android:inputType="number"
                 android:maxLength="1"
                 android:padding="5dp"
@@ -98,15 +135,22 @@
                 android:textSize="15sp"
 
                 tools:ignore="Autofill,RtlCompat" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="2dp"
+                android:background="@color/black"
+                />
 
             <EditText
                 android:id="@+id/tvNum4"
-                android:layout_width="50dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="50dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
                 android:background="@drawable/roundedbuttonprimary"
                 android:gravity="center"
-                android:hint="@string/num4"
                 android:inputType="number"
                 android:maxLength="1"
                 android:padding="5dp"
@@ -116,16 +160,25 @@
 
                 tools:ignore="Autofill,RtlCompat" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/"
+                android:textSize="25sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:textColor="@color/black"
+                tools:ignore="HardcodedText" />
 
             <EditText
                 android:id="@+id/tvCh1"
-                android:layout_width="50dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
                 android:background="@drawable/roundedbuttonprimary"
                 android:gravity="center"
-                android:hint="@string/ch1"
                 android:inputType="text"
                 android:maxLength="1"
                 android:padding="5dp"
@@ -134,16 +187,22 @@
                 android:textSize="15sp"
 
                 tools:ignore="Autofill,RtlCompat" />
+            <View
+                android:layout_width="10dp"
+                android:layout_height="2dp"
+                android:background="@color/black"
+                />
 
 
             <EditText
                 android:id="@+id/tvCh2"
-                android:layout_width="50dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="50dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginStart="3dp"
                 android:background="@drawable/roundedbuttonprimary"
                 android:gravity="center"
-                android:hint="@string/ch2"
                 android:inputType="text"
                 android:maxLength="1"
                 android:padding="5dp"
@@ -152,16 +211,22 @@
                 android:textSize="15sp"
 
                 tools:ignore="Autofill,RtlCompat" />
+            <View
+                android:layout_width="10dp"
+                android:layout_height="2dp"
+                android:background="@color/black"
+                />
 
 
             <EditText
                 android:id="@+id/tvCh3"
-                android:layout_width="50dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="50dp"
                 android:layout_marginEnd="5dp"
+                android:layout_marginStart="3dp"
                 android:background="@drawable/roundedbuttonprimary"
                 android:gravity="center"
-                android:hint="@string/ch3"
                 android:inputType="text"
                 android:maxLength="1"
                 android:padding="5dp"

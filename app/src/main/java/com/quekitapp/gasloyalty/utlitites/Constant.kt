@@ -28,6 +28,7 @@ class Constant {
         //online
         @JvmField
         var baseUrl = "http://192.168.1.117/RestAPI/api/"
+//        var baseUrl="http://openmindsoffice.ddns.net:88/RestAPI/api/"
         @JvmField
         var Currancy = "http://api.propertyturkey.com/api/v1/currency?api_key=" + apiValue
 

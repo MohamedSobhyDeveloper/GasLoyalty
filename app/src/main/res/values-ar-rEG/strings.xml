@@ -43,7 +43,8 @@
     <string name="please_review_gas_pipe_maintenance">الرجاء مراجعة صيانة اسطوانة الغاز</string>
     <string name="no_data_found_for_this_palte_number">لم يتم العثور على بيانات لرقم اللوحة</string>
     <string name="update_plate_number">تعديل بيانات اللوحة</string>
-    <string name="verifed_plate_num">تم التحقق من رقم اللوحة يمكنك الشحن الان</string>
+    <string name="verifed_plate_num">تم التحقق من رقم اللوحة بنجاح</string>
+    <string name="can_charge_now">يمكنك الشحن الان</string>
     <string name="num1">num1</string>
     <string name="num2">num2</string>
     <string name="num3">num3</string>
@@ -53,8 +54,9 @@
     <string name="ch2">ch2</string>
     <string name="update">تحديث</string>
     <string name="enter_valid_plate">تاكد من بيانات اللوحة</string>
-    <string name="verify_plate">لم يتم التعرف على رقم اللوحة الرجاء مراجعة تعديل بيانات اللوحة</string>
+    <string name="verify_plate"> الرجاء مراجعة تعديل بيانات اللوحة المتعلقة بكود التانك</string>
     <string name="check_data">من فضلك تاكد من البيانات</string>
     <string name="verify_plate_number">تحقق من رقم اللوحة</string>
+    <string name="tank_details">بيانات التانك</string>
 
 </resources>
