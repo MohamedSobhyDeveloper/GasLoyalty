@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
-import android.view.View
 import com.google.zxing.Result
 import com.interactive.ksi.propertyturkeybooking.interfaces.HandleRetrofitResp
 import com.interactive.ksi.propertyturkeybooking.retrofitconfig.HandelCalls
@@ -64,17 +63,14 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler, HandleRet
 
     override fun onResponseSuccess(flag: String?, o: Any?) {
         if (flag == DataEnum.scan.name) {
-
             scanModel = o as ScanModel
-
-            if (scanModel.pk.equals("-1")) {
+            if (scanModel.pk == "-1") {
                 TastyToast.makeText(
                     this,
                     getString(R.string.no_data_found_for_this_tank),
                     TastyToast.LENGTH_SHORT,
                     TastyToast.ERROR
                 )
-
             } else {
                 if (scanModel.valid == "-1") {
                     TastyToast.makeText(

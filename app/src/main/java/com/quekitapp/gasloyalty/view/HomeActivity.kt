@@ -225,19 +225,32 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
             })
 
         }else{
-            HelpMe.getInstance(this)?.infoDialog(plateNumberModel, true, true, object : HelpMe.ViewListenerInterface {
-                override fun clickView() {
-                    val intent = Intent(this@HomeActivity, ChargeActivity::class.java)
-                    intent.putExtra("mobile", plateNumberModel.mobile)
-                    startActivity(intent)
-                }
 
-                override fun verifyclickView() {
-//                    EasyImage.openCamera(this@HomeActivity, 0)
-
-                }
-
-            })
+            val intent = Intent(this@HomeActivity, UpdatePlateActivity::class.java)
+            intent.putExtra("balance", plateNumberModel.balance)
+            intent.putExtra("mobile", plateNumberModel.mobile)
+            intent.putExtra("name", plateNumberModel.name)
+            intent.putExtra("pk", plateNumberModel.pk)
+            intent.putExtra("plate_no", plateNumberModel.plate_no)
+            intent.putExtra("ssn", plateNumberModel.ssn)
+            intent.putExtra("tag_id", plateNumberModel.tag_id)
+            intent.putExtra("valid", plateNumberModel.valid)
+            intent.putExtra("maintenance_date", plateNumberModel.maintenance_date)
+            intent.putExtra("EventID", plateNumberModel.EventID)
+            startActivity(intent)
+//            HelpMe.getInstance(this)?.infoDialog(plateNumberModel, true, true, object : HelpMe.ViewListenerInterface {
+//                override fun clickView() {
+//                    val intent = Intent(this@HomeActivity, ChargeActivity::class.java)
+//                    intent.putExtra("mobile", plateNumberModel.mobile)
+//                    startActivity(intent)
+//                }
+//
+//                override fun verifyclickView() {
+////                    EasyImage.openCamera(this@HomeActivity, 0)
+//
+//                }
+//
+//            })
 
         }
 
