@@ -237,6 +237,7 @@ class HomeActivity : BaseActivity(),HandleRetrofitResp {
             intent.putExtra("valid", plateNumberModel.valid)
             intent.putExtra("maintenance_date", plateNumberModel.maintenance_date)
             intent.putExtra("EventID", plateNumberModel.EventID)
+            intent.putExtra("fromHome", "true")
             startActivity(intent)
 //            HelpMe.getInstance(this)?.infoDialog(plateNumberModel, true, true, object : HelpMe.ViewListenerInterface {
 //                override fun clickView() {

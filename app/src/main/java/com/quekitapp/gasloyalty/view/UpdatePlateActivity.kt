@@ -56,6 +56,13 @@ class UpdatePlateActivity : BaseActivity(), HandleRetrofitResp {
         tank_tv.text = scanModel.tag_id
         blance_tv.text = scanModel.balance
         maintenance_tv.text = scanModel.maintenance_date
+
+        if (intent.getStringExtra("fromHome").equals("true")){
+            success_info.visibility=View.VISIBLE
+            success_info2.visibility=View.VISIBLE
+            chargebtn.visibility = View.VISIBLE
+            verifyplatebtn.visibility=View.GONE
+        }
     }
 
     private fun click() {

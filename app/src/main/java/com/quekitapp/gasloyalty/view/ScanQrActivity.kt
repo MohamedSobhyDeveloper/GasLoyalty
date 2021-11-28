@@ -91,6 +91,7 @@ class ScanQrActivity : BaseActivity(), ZXingScannerView.ResultHandler, HandleRet
                     intent.putExtra("valid", scanModel.valid)
                     intent.putExtra("maintenance_date", scanModel.maintenance_date)
                     intent.putExtra("EventID", scanModel.EventID)
+                    intent.putExtra("fromHome", "false")
                     startActivity(intent)
                     finish()
 //          showInfoDialog(scanModel,false)
