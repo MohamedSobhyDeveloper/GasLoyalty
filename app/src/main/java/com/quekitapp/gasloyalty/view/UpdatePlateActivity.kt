@@ -170,7 +170,13 @@ class UpdatePlateActivity : BaseActivity(), HandleRetrofitResp {
             if (data.message == "1") {
                 val intent = Intent(this@UpdatePlateActivity, ChargeActivity::class.java)
                 intent.putExtra("mobile", scanModel.mobile)
-                intent.putExtra("eventId", plateNumberModel.EventID)
+                if (intent.getStringExtra("fromHome").equals("true")){
+                    intent.putExtra("eventId", scanModel.EventID)
+
+                }else{
+                    intent.putExtra("eventId", plateNumberModel.EventID)
+
+                }
                 startActivity(intent)
                 finish()
             } else {
